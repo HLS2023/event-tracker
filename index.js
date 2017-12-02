@@ -1,8 +1,9 @@
-var express = require("express");
-var request = require("request");
-var bodyParser = require("body-parser");
+let express = require("express");
+let request = require("request");
+let bodyParser = require("body-parser");
+PAGE_ACCESS_TOKEN="<PEAACZAOA4bVZA0BAA25RtwQ5Rd2LhaKMYfGvYlvIKZCWF1ZAxXBgAn5mW51m7dAvAiq9CgZAhPHFf7ujCV3eTYg8OujMZCHYZAIKp5THaHZAdgk36d0WnGVwbJFJaF2TPKZACRCBq3Wx1JzoI6XZBB4PtSo7ZC6WEN1mrpwYSxypCf9RznOzaWMcMO1a>";
 
-var app = express();
+let app = express();
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.listen((process.env.PORT || 5000));
@@ -18,7 +19,8 @@ app.get("/webhook", function (req, res) {
   if (req.query["hub.verify_token"] === process.env.VERIFICATION_TOKEN) {
     console.log("Verified webhook");
     res.status(200).send(req.query["hub.challenge"]);
-  } else {
+  }
+  else {
     console.error("Verification failed. The tokens do not match.");
     res.sendStatus(403);
   }
@@ -67,7 +69,7 @@ function processPostback(event) {
         name = bodyObj.first_name;
         greeting = "Hi " + name + ". ";
       }
-      var message = greeting + "Hello and welcome to the Harvard EventTracker. How may we help you?";
+      var message = greeting + "I am the Harvard EvenTracker. I can tell you what's happening on campus. What day are you looking for?";
       sendMessage(senderId, {text: message});
     });
   }
@@ -89,3 +91,4 @@ function sendMessage(recipientId, message) {
     }
   });
 }
+
