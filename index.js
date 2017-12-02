@@ -1,7 +1,8 @@
 let express = require("express");
 let request = require("request");
 let bodyParser = require("body-parser");
-PAGE_ACCESS_TOKEN="<PEAACZAOA4bVZA0BAA25RtwQ5Rd2LhaKMYfGvYlvIKZCWF1ZAxXBgAn5mW51m7dAvAiq9CgZAhPHFf7ujCV3eTYg8OujMZCHYZAIKp5THaHZAdgk36d0WnGVwbJFJaF2TPKZACRCBq3Wx1JzoI6XZBB4PtSo7ZC6WEN1mrpwYSxypCf9RznOzaWMcMO1a>";
+
+const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
 let app = express();
 app.use(bodyParser.urlencoded({extended: false}));
@@ -16,6 +17,8 @@ app.get("/", function (req, res) {
 // Facebook Webhook
 // Used for verification
 app.get("/webhook", function (req, res) {
+  const VERIFY_TOKEN = "<YOUR_VERIFY_TOKEN>";
+
   if (req.query["hub.verify_token"] === process.env.VERIFICATION_TOKEN) {
     console.log("Verified webhook");
     res.status(200).send(req.query["hub.challenge"]);
@@ -27,68 +30,47 @@ app.get("/webhook", function (req, res) {
 });
 
 
-// All callbacks for Messenger will be POST-ed here
-app.post("/webhook", function (req, res) {
-  // Make sure this is a page subscription
-  if (req.body.object == "page") {
-    // Iterate over each entry
-    // There may be multiple entries if batched
-    req.body.entry.forEach(function(entry) {
-      // Iterate over each messaging event
-      entry.messaging.forEach(function(event) {
-        if (event.postback) {
-          processPostback(event);
-        }
-      });
+app.post('/webhook', (req, res) => {
+
+  // Parse the request body from the POST
+  let body = req.body;
+
+  // Check the webhook event is from a Page subscription
+  if (body.object === 'page') {
+
+    // Iterate over each entry - there may be multiple if batched
+    body.entry.forEach(function(entry) {
+
+      // Gets the body of the webhook event
+      let webhook_event = entry.messaging[0];
+      console.log(webhook_event);
+
+      // Get the sender PSID
+      let sender_psid = webhook_event.sender.id;
+      console.log('Sender PSID: ' + sender_psid);
     });
 
-    res.sendStatus(200);
+    // Return a '200 OK' response to all events
+    res.status(200).send('EVENT_RECEIVED');
+
+  } else {
+    // Return a '404 Not Found' if event is not from a page subscription
+    res.sendStatus(404);
   }
+
 });
 
-function processPostback(event) {
-  var senderId = event.sender.id;
-  var payload = event.postback.payload;
+// Handles messages events
+function handleMessage(sender_psid, received_message) {
 
-  if (payload === "Greeting") {
-    // Get user's first name from the User Profile API
-    // and include it in the greeting
-    request({
-      url: "https://graph.facebook.com/v2.6/" + senderId,
-      qs: {
-        access_token: process.env.PAGE_ACCESS_TOKEN,
-        fields: "first_name"
-      },
-      method: "GET"
-    }, function(error, response, body) {
-      var greeting = "";
-      if (error) {
-        console.log("Error getting user's name: " +  error);
-      } else {
-        var bodyObj = JSON.parse(body);
-        name = bodyObj.first_name;
-        greeting = "Hi " + name + ". ";
-      }
-      var message = greeting + "I am the Harvard EvenTracker. I can tell you what's happening on campus. What day are you looking for?";
-      sendMessage(senderId, {text: message});
-    });
-  }
 }
 
-// sends message to user
-function sendMessage(recipientId, message) {
-  request({
-    url: "https://graph.facebook.com/v2.6/me/messages",
-    qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
-    method: "POST",
-    json: {
-      recipient: {id: recipientId},
-      message: message,
-    }
-  }, function(error, response, body) {
-    if (error) {
-      console.log("Error sending message: " + response.error);
-    }
-  });
+// Handles messaging_postbacks events
+function handlePostback(sender_psid, received_postback) {
+
 }
 
+// Sends response messages via the Send API
+function callSendAPI(sender_psid, response) {
+
+}
