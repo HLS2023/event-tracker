@@ -1,35 +1,32 @@
-let express = require("express");
-let request = require("request");
-let bodyParser = require("body-parser");
+/**
+ * Copyright 2017-present, Facebook, Inc. All rights reserved.
+ *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ *
+ * Starter Project for Messenger Platform Quick Start Tutorial
+ *
+ * Use this project as the starting point for following the
+ * Messenger Platform quick start tutorial.
+ *
+ * https://developers.facebook.com/docs/messenger-platform/getting-started/quick-start/
+ *
+ */
 
-const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+'use strict';
 
-let app = express();
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
-app.listen((process.env.PORT || 5000));
+// Imports dependencies and set up http server
+const
+  request = require('request'),
+  express = require('express'),
+  body_parser = require('body-parser'),
+  app = express().use(body_parser.json()); // creates express http server
 
-// Server index page
-app.get("/", function (req, res) {
-  res.send("Deployed!");
-});
+// Sets server port and logs message on success
+app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
-// Facebook Webhook
-// Used for verification
-app.get("/webhook", function (req, res) {
-  const VERIFY_TOKEN = "<YOUR_VERIFY_TOKEN>";
-
-  if (req.query["hub.verify_token"] === process.env.VERIFICATION_TOKEN) {
-    console.log("Verified webhook");
-    res.status(200).send(req.query["hub.challenge"]);
-  }
-  else {
-    console.error("Verification failed. The tokens do not match.");
-    res.sendStatus(403);
-  }
-});
-
-
+// Accepts POST requests at /webhook endpoint
 app.post('/webhook', (req, res) => {
 
   // Parse the request body from the POST
@@ -41,13 +38,11 @@ app.post('/webhook', (req, res) => {
     // Iterate over each entry - there may be multiple if batched
     body.entry.forEach(function(entry) {
 
-      // Gets the body of the webhook event
+      // Get the webhook event. entry.messaging is an array, but
+      // will only ever contain one event, so we get index 0
       let webhook_event = entry.messaging[0];
       console.log(webhook_event);
 
-      // Get the sender PSID
-      let sender_psid = webhook_event.sender.id;
-      console.log('Sender PSID: ' + sender_psid);
     });
 
     // Return a '200 OK' response to all events
@@ -60,48 +55,30 @@ app.post('/webhook', (req, res) => {
 
 });
 
-function processPostback(event) {
-  var senderId = event.sender.id;
-  var payload = event.postback.payload;
+// Accepts GET requests at the /webhook endpoint
+app.get('/webhook', (req, res) => {
 
-  if (payload === "Greeting") {
-    // Get user's first name from the User Profile API
-    // and include it in the greeting
-    request({
-      url: "https://graph.facebook.com/v2.6/" + senderId,
-      qs: {
-        access_token: process.env.PAGE_ACCESS_TOKEN,
-        fields: "first_name"
-      },
-      method: "GET"
-    }, function(error, response, body) {
-      var greeting = "";
-      if (error) {
-        console.log("Error getting user's name: " +  error);
-      } else {
-        var bodyObj = JSON.parse(body);
-        name = bodyObj.first_name;
-        greeting = "Hi " + name + ". ";
-      }
-      var message = greeting + "Hi. I am the Harvard Event Tracker!";
-      sendMessage(senderId, {text: message});
-    });
+  /** UPDATE YOUR VERIFY TOKEN **/
+  const VERIFY_TOKEN = "<YOUR_VERIFY_TOKEN>";
+
+  // Parse params from the webhook verification request
+  let mode = req.query['hub.mode'];
+  let token = req.query['hub.verify_token'];
+  let challenge = req.query['hub.challenge'];
+
+  // Check if a token and mode were sent
+  if (mode && token) {
+
+    // Check the mode and token sent are correct
+    if (mode === 'subscribe' && token === VERIFY_TOKEN) {
+
+      // Respond with 200 OK and challenge token from the request
+      console.log('WEBHOOK_VERIFIED');
+      res.status(200).send(challenge);
+
+    } else {
+      // Responds with '403 Forbidden' if verify tokens do not match
+      res.sendStatus(403);
+    }
   }
-}
-
-// sends message to user
-function sendMessage(sender_psid, message) {
-  request({
-    url: "https://graph.facebook.com/v2.6/me/messages",
-    qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
-    method: "POST",
-    json: {
-      recipient: {id: sender_psid},
-      message: message,
-    }
-  }, function(error, response, body) {
-    if (error) {
-      console.log("Error sending message: " + response.error);
-    }
-  });
-}
+});
