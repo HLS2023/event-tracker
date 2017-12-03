@@ -112,7 +112,7 @@ function handleMessage(sender_psid, received_message) {
     // Create the payload for a basic text message
     response = {
       "text": `You sent the message: "${received_message.text}". Now send me an image!`
-    }
+    };
   }
 
   // Sends the response message
@@ -131,7 +131,7 @@ function callSendAPI(sender_psid, response) {
       "id": sender_psid
     },
     "message": response
-  }
+  };
 
   // Send the HTTP request to the Messenger Platform
   request({
@@ -145,5 +145,5 @@ function callSendAPI(sender_psid, response) {
     } else {
       console.error("Unable to send message:" + err);
     }
-  })
+  });
 }
