@@ -20,7 +20,7 @@
   },
   "engines": {
     "node": "~4.1.2"
-  }
+  },
   "homepage": "https://github.com/sitepoint-editors/spbot#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
