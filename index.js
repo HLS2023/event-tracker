@@ -74,7 +74,7 @@ app.post('/webhook', (req, res) => {
 app.get('/webhook', (req, res) => {
 
   /** UPDATE YOUR VERIFY TOKEN **/
-  const VERIFY_TOKEN = "<YOUR_VERIFY_TOKEN>";
+  const VERIFY_TOKEN = "<VERIFICATION_TOKEN>";
 
   // Parse params from the webhook verification request
   let mode = req.query['hub.mode'];
@@ -91,7 +91,8 @@ app.get('/webhook', (req, res) => {
       console.log('WEBHOOK_VERIFIED');
       res.status(200).send(challenge);
 
-    } else {
+    }
+    else {
       // Responds with '403 Forbidden' if verify tokens do not match
       res.sendStatus(403);
     }
