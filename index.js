@@ -111,35 +111,28 @@ app.get('/webhook', (req, res) => {
 
 function handleMessage(sender_psid, received_message) {
   let response;
-
   // Checks if the message contains text
   if (received_message.text) {
-    // Create the payload for a basic text message, which
-    // will be added to the body of our request to the Send API
-    response = {
-      "text": `Hello! Welcome to the Harvard EventTracker! Now please type in 'date' to select a date!`
-    };
-  } else if (received_message.text == "date") {
     // Get the URL of the message attachment
-    let date_message = received_message.text[1].payload.url;
+    let attachment_url = received_message.attachments[0].payload.url;
     response = {
-      "date": {   // attachment
+      "attachment": {
         "type": "template",
         "payload": {
           "template_type": "generic",
           "elements": [{
             "title": "What date are you searching for?",
             "subtitle": "Tap a button to answer.",
-            // "image_url": attachment_url,
+            "image_url": attachment_url,
             "buttons": [
               {
                 "type": "postback",
-                "title": "Friday",
+                "title": "Friday!",
                 "payload": "friday",
               },
               {
                 "type": "postback",
-                "title": "Saturday",
+                "title": "Saturday!",
                 "payload": "saturday",
               }
             ],
