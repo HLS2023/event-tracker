@@ -25,13 +25,16 @@ const
   body_parser = require('body-parser'),
   app = express().use(body_parser.json()); // creates express http server
 
+
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
+
 
 // Server index page
 app.get("/", function (req, res) {
   res.send("Deployed!");
 });
+
 
 // Accepts POST requests at /webhook endpoint
 app.post('/webhook', (req, res) => {
@@ -75,6 +78,7 @@ app.post('/webhook', (req, res) => {
 
 });
 
+
 // Accepts GET requests at the /webhook endpoint
 app.get('/webhook', (req, res) => {
 
@@ -104,6 +108,7 @@ app.get('/webhook', (req, res) => {
   }
 });
 
+
 function handleMessage(sender_psid, received_message) {
   let response;
 
@@ -112,7 +117,7 @@ function handleMessage(sender_psid, received_message) {
     // Create the payload for a basic text message, which
     // will be added to the body of our request to the Send API
     response = {
-      "text": `You sent the message: "${received_message.text}". Please select the date you are searching for!`
+      "text": `You sent the message: "${received_message.text}". Now send me an attachment!`
     };
   } else if (received_message.attachments) {
     // Get the URL of the message attachment
@@ -123,18 +128,18 @@ function handleMessage(sender_psid, received_message) {
         "payload": {
           "template_type": "generic",
           "elements": [{
-            "title": "Which date are you searching for events?",
+            "title": "Is this the right picture?",
             "subtitle": "Tap a button to answer.",
             "image_url": attachment_url,
             "buttons": [
               {
                 "type": "postback",
-                "title": "Friday!",
+                "title": "Yes!",
                 "payload": "yes",
               },
               {
                 "type": "postback",
-                "title": "Saturday!",
+                "title": "No!",
                 "payload": "no",
               }
             ],
@@ -148,6 +153,7 @@ function handleMessage(sender_psid, received_message) {
   callSendAPI(sender_psid, response);
 }
 
+
 function handlePostback(sender_psid, received_postback) {
   let response;
 
@@ -156,9 +162,9 @@ function handlePostback(sender_psid, received_postback) {
 
   // Set the response based on the postback payload
   if (payload === 'yes') {
-    response = { "text": "The following events that are happening are: Pfoho Pfriday, CS50 Lunch at Changsho, CS50 Fair!" };
+    response = { "text": "Thanks!" };
   } else if (payload === 'no') {
-    response = { "text": "A Rager in the Pfoho Igloo!" };
+    response = { "text": "Oops, try sending another image." };
   }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
