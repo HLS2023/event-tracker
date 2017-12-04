@@ -53,12 +53,6 @@ app.post('/webhook', (req, res) => {
         }
     }
     res.sendStatus(200);
-
-  } else {
-    // Return a '404 Not Found' if event is not from a page subscription
-    res.sendStatus(404);
-  }
-
 });
 
 
@@ -123,7 +117,7 @@ function handleMessage(sender_psid, received_message) {
                 }]
             }
         }
-    }
+    };
 }
 
 function handlePostback(sender_psid, received_postback) {
