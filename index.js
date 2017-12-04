@@ -117,30 +117,30 @@ function handleMessage(sender_psid, received_message) {
     // Create the payload for a basic text message, which
     // will be added to the body of our request to the Send API
     response = {
-      "text": `You sent the message: "${received_message.text}". Now send me an attachment!`
+      "text": `Hello! Welcome to the Harvard EventTracker! Now please type in 'date' to select a date!`
     };
-  } else if (received_message.attachments) {
+  } else if (received_message.text) {
     // Get the URL of the message attachment
-    let attachment_url = received_message.attachments[0].payload.url;
+    let date_message = received_message.text[1].payload.url;
     response = {
-      "attachment": {
+      "date": {   // attachment
         "type": "template",
         "payload": {
           "template_type": "generic",
           "elements": [{
-            "title": "Is this the right picture?",
+            "title": "What date are you searching for?",
             "subtitle": "Tap a button to answer.",
-            "image_url": attachment_url,
+            // "image_url": attachment_url,
             "buttons": [
               {
                 "type": "postback",
-                "title": "Yes!",
-                "payload": "yes",
+                "title": "Friday",
+                "payload": "friday",
               },
               {
                 "type": "postback",
-                "title": "No!",
-                "payload": "no",
+                "title": "Saturday",
+                "payload": "saturday",
               }
             ],
           }]
@@ -161,10 +161,10 @@ function handlePostback(sender_psid, received_postback) {
   let payload = received_postback.payload;
 
   // Set the response based on the postback payload
-  if (payload === 'yes') {
-    response = { "text": "Thanks!" };
-  } else if (payload === 'no') {
-    response = { "text": "Oops, try sending another image." };
+  if (payload === 'friday') {
+    response = { "text": "Thanks! Here is what is happening on Friday." };
+  } else if (payload === 'saturday') {
+    response = { "text": "Thanks! Here is what is happening on Saturday." };
   }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
