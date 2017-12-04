@@ -119,7 +119,7 @@ function handleMessage(sender_psid, received_message) {
     response = {
       "text": `Hello! Welcome to the Harvard EventTracker! Now please type in 'date' to select a date!`
     };
-  } else if (received_message.text) {
+  } else if (received_message.text == "date") {
     // Get the URL of the message attachment
     let date_message = received_message.text[1].payload.url;
     response = {
