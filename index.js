@@ -112,7 +112,7 @@ function handleMessage(sender_psid, received_message) {
     // Create the payload for a basic text message, which
     // will be added to the body of our request to the Send API
     response = {
-      "text": `You sent the message: "${received_message.text}". Now send me an attachment!`
+      "text": `You sent the message: "${received_message.text}". Please select the date you are searching for!`
     };
   } else if (received_message.attachments) {
     // Get the URL of the message attachment
@@ -123,18 +123,18 @@ function handleMessage(sender_psid, received_message) {
         "payload": {
           "template_type": "generic",
           "elements": [{
-            "title": "Is this the right picture?",
+            "title": "Which date are you searching for events?",
             "subtitle": "Tap a button to answer.",
             "image_url": attachment_url,
             "buttons": [
               {
                 "type": "postback",
-                "title": "Yes!",
+                "title": "Friday!",
                 "payload": "yes",
               },
               {
                 "type": "postback",
-                "title": "No!",
+                "title": "Saturday!",
                 "payload": "no",
               }
             ],
@@ -156,9 +156,9 @@ function handlePostback(sender_psid, received_postback) {
 
   // Set the response based on the postback payload
   if (payload === 'yes') {
-    response = { "text": "Thanks!" };
+    response = { "text": "The following events that are happening are: Pfoho Pfriday, CS50 Lunch at Changsho, CS50 Fair!" };
   } else if (payload === 'no') {
-    response = { "text": "Oops, try sending another image." };
+    response = { "text": "A Rager in the Pfoho Igloo!" };
   }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
