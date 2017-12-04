@@ -36,6 +36,10 @@ app.get("/", function (req, res) {
 });
 
 
+app.post('/webhook/', function (req, res) {
+
+})
+
 // Accepts POST requests at /webhook endpoint
 app.post('/webhook', (req, res) => {
 
@@ -68,8 +72,20 @@ app.post('/webhook', (req, res) => {
 
     });
 
-    // Return a '200 OK' response to all events
-    res.status(200).send('EVENT_RECEIVED');
+    messaging_events = req.body.entry[0].messaging;
+    for (i = 0; i < messaging_events.length; i++) {
+        event = req.body.entry[0].messaging[i];
+        sender = event.sender.id;
+        if (event.message && event.message.text) {
+            text = event.message.text;
+            if (text === 'Generic') {
+                sendGenericMessage(sender);
+                continue;
+            }
+            sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200));
+        }
+    }
+    res.sendStatus(200);
 
   } else {
     // Return a '404 Not Found' if event is not from a page subscription
@@ -110,42 +126,38 @@ app.get('/webhook', (req, res) => {
 
 
 function handleMessage(sender_psid, received_message) {
-  let response;
-  // Checks if the message contains text
-  if (received_message.text) {
-    // Get the URL of the message attachment
-    let attachment_url = received_message.attachments[0].payload.url;
-    response = {
-      "attachment": {
-        "type": "template",
-        "payload": {
-          "template_type": "generic",
-          "elements": [{
-            "title": "What date are you searching for?",
-            "subtitle": "Tap a button to answer.",
-            "image_url": attachment_url,
-            "buttons": [
-              {
-                "type": "postback",
-                "title": "Friday!",
-                "payload": "friday",
-              },
-              {
-                "type": "postback",
-                "title": "Saturday!",
-                "payload": "saturday",
-              }
-            ],
-          }]
+    messageData = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [{
+                    "title": "First card",
+                    "subtitle": "Element #1 of an hscroll",
+                    "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": "https://www.messenger.com",
+                        "title": "web url"
+                    }, {
+                        "type": "postback",
+                        "title": "Postback",
+                        "payload": "Payload for first element in a generic bubble",
+                    }],
+                }, {
+                    "title": "Second card",
+                    "subtitle": "Element #2 of an hscroll",
+                    "image_url": "http://messengerdemo.parseapp.com/img/gearvr.png",
+                    "buttons": [{
+                        "type": "postback",
+                        "title": "Postback",
+                        "payload": "Payload for second element in a generic bubble",
+                    }],
+                }]
+            }
         }
-      }
-    };
-  }
-
-  // Send the response message
-  callSendAPI(sender_psid, response);
+    }
 }
-
 
 function handlePostback(sender_psid, received_postback) {
   let response;
