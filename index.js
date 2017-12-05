@@ -28,10 +28,12 @@ const
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
+
 // Server index page
 app.get("/", function (req, res) {
   res.send("Deployed!");
 });
+
 
 // Accepts POST requests at /webhook endpoint
 app.post('/webhook', (req, res) => {
@@ -75,6 +77,7 @@ app.post('/webhook', (req, res) => {
 
 });
 
+
 // Accepts GET requests at the /webhook endpoint
 app.get('/webhook', (req, res) => {
 
@@ -104,6 +107,7 @@ app.get('/webhook', (req, res) => {
   }
 });
 
+
 function handleMessage(sender_psid, received_message) {
   let response;
 
@@ -120,7 +124,7 @@ function handleMessage(sender_psid, received_message) {
     // let attachment_url = received_message.attachments[0].payload.url;
     response = {
       //"attachment": {
-        "type": "template",
+        // "type": "template",
         "payload": {
           "template_type": "generic",
           "elements": [{
