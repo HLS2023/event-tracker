@@ -5,18 +5,19 @@ const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
 'use strict';
 
-// Imports dependencies and set sup http server
+// Imports dependencies and sets up http server
+// Also sets variables for Google Calendar API authorization
 const
+  // Express HTTP
   request = require('request'),
   express = require('express'),
   body_parser = require('body-parser'),
-  app = express().use(body_parser.json()); // creates express http server
-
-// Global variables for Google Calendar API authorization
-let fs = require('fs');
-let readline = require('readline');
-let google = require('googleapis');
-let googleAuth = require('google-auth-library');
+  app = express().use(body_parser.json()),
+  // Google Calendar
+  fs = require('fs'),
+  readline = require('readline'),
+  google = require('googleapis'),
+  googleAuth = require('google-auth-library');
 
 // Global variable array for four House calendars:
 // PfoHo (Igloo), Kirkland House, Mather House, and Adams House
