@@ -184,9 +184,9 @@ function handlePostback(sender_psid, received_postback) {
 
   // Set the response based on the postback payload
   if (payload === 'Friday') {
-    response = loadqhJSON;
+    response = loadqhJSON(callback);
   } else if (payload === 'Saturday') {
-    response = loadcabJSON;
+    response = loadcabJSON(callback);
   }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
