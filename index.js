@@ -183,15 +183,14 @@ function handlePostback(sender_psid, received_postback) {
   let payload = received_postback.payload;
 
   // Set the response based on the postback payload
-  if (payload === 'qh') {
-    response == readTextFile("workspace/harvard-event-tracker/json/queenshead.json", function(text){
-      let json_qh = require('./queenshead.json');
-      for (let index_qh = 0; index_qh < 4; index_qh++)
-      {
-          response == json_qh.data[index].name + ' | ' + json_qh.data[index].start_time + ' to ' + json_qh.data[index].end_time;
-      }
-    });
-  }
+  if (payload === 'qh')
+  {
+    let json_qh = require('./queenshead.json');
+    for (let index_qh = 0; index_qh < 4; index_qh++)
+    {
+        response == json_qh.data[index].name + ' | ' + json_qh.data[index].start_time + ' to ' + json_qh.data[index].end_time;
+    }
+  ]
 
   else if (payload === 'cabcaf') {
   response == 'Cabot Cafe response!'
