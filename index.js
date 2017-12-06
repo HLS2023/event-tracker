@@ -1,6 +1,17 @@
 // Citations:
 // 1. Google Calendar API, https://developers.google.com/google-apps/calendar/quickstart/js
 
+const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+
+'use strict';
+
+// Imports dependencies and set sup http server
+const
+  request = require('request'),
+  express = require('express'),
+  body_parser = require('body-parser'),
+  app = express().use(body_parser.json()); // creates express http server
+
 // Global variables for Google Calendar API authorization
 let fs = require('fs');
 let readline = require('readline');
@@ -39,19 +50,6 @@ fs.readFile('client_secret.json', function processClientSecrets(err, content) {
 });
 
 
-const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
-
-'use strict';
-
-
-// Imports dependencies and set sup http server
-const
-  request = require('request'),
-  express = require('express'),
-  body_parser = require('body-parser'),
-  app = express().use(body_parser.json()); // creates express http server
-
-
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
@@ -59,6 +57,36 @@ app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 // Server index page
 app.get("/", function (req, res) {
   res.send("Deployed!");
+});
+
+
+// Accepts GET requests at the /webhook endpoint
+app.get('/webhook', (req, res) => {
+
+  /** UPDATE YOUR VERIFY TOKEN **/
+  const VERIFY_TOKEN = "VERIFICATION_TOKEN";
+
+  // Parse params from the webhook verification request
+  let mode = req.query['hub.mode'];
+  let token = req.query['hub.verify_token'];
+  let challenge = req.query['hub.challenge'];
+
+  // Check if a token and mode were sent
+  if (mode && token) {
+
+    // Check the mode and token sent are correct
+    if (mode === 'subscribe' && token === VERIFY_TOKEN) {
+
+      // Respond with 200 OK and challenge token from the request
+      console.log('WEBHOOK_VERIFIED');
+      res.status(200).send(challenge);
+    }
+
+    else {
+      // Responds with '403 Forbidden' if verify tokens do not match
+      res.sendStatus(403);
+    }
+  }
 });
 
 
@@ -102,37 +130,6 @@ app.post('/webhook', (req, res) => {
   }
 
 });
-
-
-// Accepts GET requests at the /webhook endpoint
-app.get('/webhook', (req, res) => {
-
-  /** UPDATE YOUR VERIFY TOKEN **/
-  const VERIFY_TOKEN = "VERIFICATION_TOKEN";
-
-  // Parse params from the webhook verification request
-  let mode = req.query['hub.mode'];
-  let token = req.query['hub.verify_token'];
-  let challenge = req.query['hub.challenge'];
-
-  // Check if a token and mode were sent
-  if (mode && token) {
-
-    // Check the mode and token sent are correct
-    if (mode === 'subscribe' && token === VERIFY_TOKEN) {
-
-      // Respond with 200 OK and challenge token from the request
-      console.log('WEBHOOK_VERIFIED');
-      res.status(200).send(challenge);
-    }
-
-    else {
-      // Responds with '403 Forbidden' if verify tokens do not match
-      res.sendStatus(403);
-    }
-  }
-});
-
 
 function handleMessage(sender_psid, received_message) {
 	let response;
