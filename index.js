@@ -110,25 +110,28 @@ app.get('/webhook', (req, res) => {
 
 
 function handleMessage(sender_psid, received_message) {
-	let response = {
+	let response;
+
+	// Checks if the message contains text
+  if (received_message.text) {
+    // Create the payload for a basic text message, which will be added to the body of our request to the Send API
+    response = {
 		"attachment": {
 			"type": "template",
 			"payload": {
 				"template_type": "generic",
 				"elements": [{
 					"title": "Are you looking for information about Friday or Saturday?",
-					"subtitle": "Are you looking for information about Friday or Saturday?",
+					"subtitle": "Friday or Saturday?",
 					"image_url": "http://c8.alamy.com/comp/F7GDGY/john-harvard-statue-in-harvard-yard-in-autumn-fall-in-cambridge-massachusetts-F7GDGY.jpg",
 					"buttons": [{
 						"type": "web_url",
 						"url": "https://www.messenger.com",
-						"title": "Friday JSON"
-					  },
+						"title": "Friday JSON" },
 						{
-						"type": "postback",
+						"type": "web_url",
 						"url": "https://www.messenger.com",
 						"title": "Saturday JSON",
-						"payload": "saturday",
 					}],
 				},
 				]
@@ -161,7 +164,8 @@ function handlePostback(sender_psid, received_postback) {
 function callSendAPI(sender_psid, response) {
   // Construct the message body
   let request_body = {
-    "recipient": {
+    "recipient":
+    {
       "id": sender_psid
     },
     "message": response
@@ -181,5 +185,4 @@ function callSendAPI(sender_psid, response) {
     }
   });
 }
-
 
