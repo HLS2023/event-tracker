@@ -124,7 +124,7 @@ function handleMessage(sender_psid, received_message) {
 				"elements": [{
 					"title": "Are you looking for information about Cabot Cafe or Queen's Head?",
 					"subtitle": "Which venue?",
-					"image_url": "http://c8.alamy.com/comp/F7GDGY/john-harvard-statue-in-harvard-yard-in-autumn-fall-in-cambridge-massachusetts-F7GDGY.jpg",
+					"image_url": "http://www.universityevents.harvard.edu/sites/universityevents.harvard.edu/files/venue_gallderies/queenspub_gallery_2_0.jpg",
 					"buttons": [{
             "type": "postback",
             "title": "Cabot Cafe!",
@@ -185,16 +185,19 @@ function handlePostback(sender_psid, received_postback) {
   // Set the response based on the postback payload
   if (payload === 'qh') {
     response == readTextFile("workspace/harvard-event-tracker/json/queenshead.json", function(text){
-      let data = JSON.parse(text);
-      console.log(data);
+      let json_qh = require('./queenshead.json');
+      console.log(typeof json_qh);
+      for (let index_qh = 0; index_qh < 4; index_qh++)
+      {
+          console.log(json_qh.data[index].name + ' | ' + json_qh.data[index].start_time + ' to ' + json_qh.data[index].end_time);
+      }
     });
   }
-    else if (payload === 'cabcaf') {
-    response == readTextFile("workspace/harvard-event-tracker/json/cabcaf.json", function(text){
-      let data = JSON.parse(text);
-      console.log(data);
-    });
-  }
+
+  else if (payload === 'cabcaf') {
+  response == 'Cabot Cafe response!'
+  // $.getJSON("json", parameters, function(data) }
+
 
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
