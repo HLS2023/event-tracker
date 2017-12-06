@@ -16,7 +16,7 @@ const
   // Google Calendar
   fs = require('fs'),
   readline = require('readline'),
-  google = require('googleapis'),
+  // google = require('googleapis'),
   googleAuth = require('google-auth-library');
 
 // Global variable array for four House calendars:
