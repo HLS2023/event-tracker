@@ -141,8 +141,8 @@ function handleMessage(sender_psid, received_message) {
 
   // Send the response message
   callSendAPI(sender_psid, response);
+  }
 }
-
 
 function handlePostback(sender_psid, received_postback) {
   let response;
@@ -179,7 +179,7 @@ function callSendAPI(sender_psid, response) {
     "json": request_body
   }, (err, res, body) => {
     if (!err) {
-      console.log('message sent!');
+      console.log('Message sent!');
     } else {
       console.error("Unable to send message:" + err);
     }
