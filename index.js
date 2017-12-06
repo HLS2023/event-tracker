@@ -184,9 +184,12 @@ function handlePostback(sender_psid, received_postback) {
 
   // Set the response based on the postback payload
   if (payload === 'qh') {
-    response == loadJSON(queenshead.json, callback)
+    response == load(queenshead);
   } else if (payload === 'cabcaf') {
-    response == loadJSON(cabcaf.json, callback)
+    response == readTextFile("workspace/harvard-event-tracker/json/cabcaf.json", function(text){
+      let data = JSON.parse(text);
+      console.log(data);
+    });
   }
 
   // Send the message to acknowledge the postback
@@ -220,25 +223,15 @@ function callSendAPI(sender_psid, response) {
 }
 
 
-function loadJSON(file, callback) {
-
-    let xobj = new XMLHttpRequest();
-    xobj.overrideMimeType("application/json");
-    xobj.open('GET', "json/", true); // Replace 'my_data' with the path to your file
-    xobj.onreadystatechange = function () {
-          if (xobj.readyState == 4 && xobj.status == "200") {
-            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
-            callback(xobj.responseText);
-          }
+function readTextFile(file, callback) {
+    var rawFile = new XMLHttpRequest();
+    rawFile.overrideMimeType("application/json");
+    rawFile.open("GET", cabcaf.json, true);
+    rawFile.onreadystatechange = function() {
+        if (rawFile.readyState === 4 && rawFile.status == "200") {
+            callback(rawFile.responseText);
+        }
     };
-    xobj.send(null);
- }
-
-
-function load() {
-
-    loadJSON("data.json", function(response) {
-        let actual_JSON = JSON.parse(response);
-        console.log(actual_JSON);
-    });
+    rawFile.send(null);
 }
+
