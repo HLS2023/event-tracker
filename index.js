@@ -122,18 +122,18 @@ function handleMessage(sender_psid, received_message) {
 			"payload": {
 				"template_type": "generic",
 				"elements": [{
-					"title": "Are you looking for information about Friday or Saturday?",
-					"subtitle": "Friday or Saturday?",
+					"title": "Are you looking for information about Cabot Cafe or Queen's Head?",
+					"subtitle": "Which venue?",
 					"image_url": "http://c8.alamy.com/comp/F7GDGY/john-harvard-statue-in-harvard-yard-in-autumn-fall-in-cambridge-massachusetts-F7GDGY.jpg",
 					"buttons": [{
             "type": "postback",
-            "title": "Friday!",
-            "payload": "Friday",
+            "title": "Cabot Cafe!",
+            "payload": "cabcaf",
           },
           {
             "type": "postback",
-            "title": "Saturday!",
-            "payload": "Saturday",
+            "title": "Queen's Head!",
+            "payload": "qh",
           }],
 		    }]
 			}
@@ -183,11 +183,12 @@ function handlePostback(sender_psid, received_postback) {
   let payload = received_postback.payload;
 
   // Set the response based on the postback payload
-  if (payload === 'Friday') {
-    response = loadqhJSON(callback);
-  } else if (payload === 'Saturday') {
-    response = loadcabJSON(callback);
+  if (payload === 'qh') {
+    response == loadJSON(queenshead.json, callback)
+  } else if (payload === 'cabcaf') {
+    response == loadJSON(cabcaf.json, callback)
   }
+
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
 }
@@ -219,11 +220,11 @@ function callSendAPI(sender_psid, response) {
 }
 
 
-function loadcabJSON(callback) {
+function loadJSON(file, callback) {
 
     let xobj = new XMLHttpRequest();
-        xobj.overrideMimeType("application/json");
-    xobj.open('GET', 'cabcaf.json', true);
+    xobj.overrideMimeType("application/json");
+    xobj.open('GET', "json/", true); // Replace 'my_data' with the path to your file
     xobj.onreadystatechange = function () {
           if (xobj.readyState == 4 && xobj.status == "200") {
             // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
@@ -231,18 +232,13 @@ function loadcabJSON(callback) {
           }
     };
     xobj.send(null);
-}
+ }
 
-function loadqhJSON(callback) {
 
-    let xobj = new XMLHttpRequest();
-        xobj.overrideMimeType("application/json");
-    xobj.open('GET', 'queenshead.json', true);
-    xobj.onreadystatechange = function () {
-          if (xobj.readyState == 4 && xobj.status == "200") {
-            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
-            callback(xobj.responseText);
-          }
-    };
-    xobj.send(null);
+function load() {
+
+    loadJSON("data.json", function(response) {
+        let actual_JSON = JSON.parse(response);
+        console.log(actual_JSON);
+    });
 }
