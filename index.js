@@ -184,8 +184,12 @@ function handlePostback(sender_psid, received_postback) {
 
   // Set the response based on the postback payload
   if (payload === 'qh') {
-    response == load(queenshead);
-  } else if (payload === 'cabcaf') {
+    response == readTextFile("workspace/harvard-event-tracker/json/queenshead.json", function(text){
+      let data = JSON.parse(text);
+      console.log(data);
+    });
+  }
+    else if (payload === 'cabcaf') {
     response == readTextFile("workspace/harvard-event-tracker/json/cabcaf.json", function(text){
       let data = JSON.parse(text);
       console.log(data);
@@ -226,7 +230,7 @@ function callSendAPI(sender_psid, response) {
 function readTextFile(file, callback) {
     var rawFile = new XMLHttpRequest();
     rawFile.overrideMimeType("application/json");
-    rawFile.open("GET", cabcaf.json, true);
+    rawFile.open("GET", "cabcaf.json", true);
     rawFile.onreadystatechange = function() {
         if (rawFile.readyState === 4 && rawFile.status == "200") {
             callback(rawFile.responseText);
