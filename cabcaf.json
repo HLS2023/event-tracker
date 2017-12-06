@@ -1,0 +1,171 @@
+{
+  "data": [
+    {
+      "description": "Join Cabot Café in a tea tasting with local provider Mem Tea! We'll learn about growth, production, and taste profiles of White, Green, Oolong, Black, and Herbal teas. Brewing, serving, and **tasting** will also be covered!",
+      "end_time": "2017-11-01T21:00:00-0400",
+      "name": "Tea 101: with Mem Tea",
+      "place": {
+        "name": "Cabot Café",
+        "location": {
+          "city": "Cambridge",
+          "country": "United States",
+          "latitude": 42.381895461019,
+          "longitude": -71.123943328857,
+          "state": "MA",
+          "street": "60 Linnaean St",
+          "zip": "02138"
+        },
+        "id": "278980268795156"
+      },
+      "start_time": "2017-11-01T20:00:00-0400",
+      "id": "1919021655086248"
+    },
+    {
+      "description": "WE'RE BACK! Cabot Café is opening for the fall with student performers, FREE drinks for the first 60 people *new* café swag, and a new and improved menu. Come by for chats, games, studies, and all your favorite caffeinated drinks. Find us in Cabot House, Basement of E-entryway, open Sunday - Thursday, 8pm - 1am. *** Don't forget to apply to be a barista by Saturday, Sept. 9th! --> https://goo.gl/forms/kIc4uHFTZQ57fsE32 <-- Attend the info session on Thursday, Sept. 7th @ 7:30pm, just before Opening.*** This event is co-sponsored by the Quad HoCos: Cabot HoCo Currier HoCo Percy Pforzheimer",
+      "end_time": "2017-09-08T01:00:00-0400",
+      "name": "Cabot Café Fall Opening",
+      "place": {
+        "name": "Cabot Café",
+        "location": {
+          "city": "Cambridge",
+          "country": "United States",
+          "latitude": 42.381895461019,
+          "longitude": -71.123943328857,
+          "state": "MA",
+          "street": "60 Linnaean St",
+          "zip": "02138"
+        },
+        "id": "278980268795156"
+      },
+      "start_time": "2017-09-07T20:00:00-0400",
+      "id": "1731009333869932"
+    },
+    {
+      "description": "We're hiring! Want the best view of the Quad? Join us behind the counter of Cabot Café! You'll learn how to pull espresso shots and make all your favorite drinks. Pay is $11/hr (+ a free drink during your shift). Info session is September 7th at 7:30PM, with our OPENING NIGHT to follow! Applications are due September 9th -- email cabotcafemanagers@gmail.com with questions!",
+      "end_time": "2017-09-07T20:00:00-0400",
+      "name": "Barista Info Session",
+      "place": {
+        "name": "Cabot Café",
+        "location": {
+          "city": "Cambridge",
+          "country": "United States",
+          "latitude": 42.381895461019,
+          "longitude": -71.123943328857,
+          "state": "MA",
+          "street": "60 Linnaean St",
+          "zip": "02138"
+        },
+        "id": "278980268795156"
+      },
+      "start_time": "2017-09-07T19:30:00-0400",
+      "id": "345785915863955"
+    },
+    {
+      "description": "Come get your tickets for High School Musical, presented by Cabot House Theatre Board! Meet Cabot's very own High School Musical cast from 8-9PM on Sunday, April 16th in Cabot Café. Shows will be on April 22nd at 2PM and 7PM.",
+      "end_time": "2017-04-16T21:00:00-0400",
+      "name": "Meet the Cast of High School Musical in Cabot Café!",
+      "place": {
+        "name": "Cabot Café",
+        "location": {
+          "city": "Cambridge",
+          "country": "United States",
+          "latitude": 42.381895461019,
+          "longitude": -71.123943328857,
+          "state": "MA",
+          "street": "60 Linnaean St",
+          "zip": "02138"
+        },
+        "id": "278980268795156"
+      },
+      "start_time": "2017-04-16T20:00:00-0400",
+      "id": "1933610136922722"
+    },
+    {
+      "description": "Sticky Buns, Éclairs, Spinach & Cheese Croissants, Cookies, Cakes, Muffins and more... FREE with drink purchase Sunday, March 26th from 8pm - 1am. Cabot Café has a new pastry menu from Danish Pastry House! Give it a try this Sunday, let us know what you think, and enjoy the sweetness of spring :)",
+      "end_time": "2017-03-27T01:00:00-0400",
+      "name": "Spring Just Got Sweeter: New Pastries in Cabot Cafe!",
+      "place": {
+        "name": "Cabot Café",
+        "location": {
+          "city": "Cambridge",
+          "country": "United States",
+          "latitude": 42.381895461019,
+          "longitude": -71.123943328857,
+          "state": "MA",
+          "street": "60 Linnaean St",
+          "zip": "02138"
+        },
+        "id": "278980268795156"
+      },
+      "start_time": "2017-03-26T20:00:00-0400",
+      "id": "1294856117293564"
+    },
+    {
+      "description": "Roll through to work with friends on projects, essays, psets and other fun school work. I will be there with the sweet sweet research help and a writing tutor will be there from 8-9",
+      "end_time": "2017-02-22T23:00:00-0500",
+      "name": "PRF Quad Write Night",
+      "place": {
+        "name": "Cabot Café",
+        "location": {
+          "city": "Cambridge",
+          "country": "United States",
+          "latitude": 42.381895461019,
+          "longitude": -71.123943328857,
+          "state": "MA",
+          "street": "60 Linnaean St",
+          "zip": "02138"
+        },
+        "id": "278980268795156"
+      },
+      "start_time": "2017-02-22T20:00:00-0500",
+      "id": "1846557242279878"
+    },
+    {
+      "description": "Welcome Home! Cafe Café is back and better than ever as your home-away-from-dorm. Stop by our housewarming  for *freshly baked* brownies compliments of HiRise bakery, *homemade* cookies courtesy of Pepperidge Farm, and *FREE* drinks served to the first 100 people. We've got all your favorites, from Tai Chi Chai Tea to a warm cup of cocoa to cuddle up with by the light of your laptop. So come by, bring your friends and roommates, and enjoy an evening in with our cozy Café staff. We'll be open every Sunday through Thursday, 8pm - 1am for work or play. What's ours is yours. Co-sponsored by Currier HoCo, Cabot HoCo and Pfoho HoCo.",
+      "end_time": "2017-01-30T01:00:00-0500",
+      "name": "We're Back: Cabot Café Housewarming!",
+      "place": {
+        "name": "Cabot Café",
+        "location": {
+          "city": "Cambridge",
+          "country": "United States",
+          "latitude": 42.381895461019,
+          "longitude": -71.123943328857,
+          "state": "MA",
+          "street": "60 Linnaean St",
+          "zip": "02138"
+        },
+        "id": "278980268795156"
+      },
+      "start_time": "2017-01-29T20:00:00-0500",
+      "id": "1789715684687004"
+    },
+    {
+      "description": "Come to Cabot Café's Fall Event to celebrate the season and Halloween! We will have FREE fall-themed foods from 8pm (read: pie! pastries! maple cookies!). We are also making a special fall-themed drink menu! Think Apple Cider, Chai Lattes, Pumpkin Spice, Hot Chocolate... mmmm. The Harvard Din & Tonics will be performing at 9:30pm so be sure to bring your friends and blockmates for a wonderful evening in the Quad <3 Co-sponsored by Cabot HoCo, Currier HoCo and Pfoho HoCo. Thank you!",
+      "end_time": "2016-10-31T01:00:00-0400",
+      "name": "Cabot Café Fall Festival! Din&Tonics at 9:30pm",
+      "place": {
+        "name": "Cabot Café",
+        "location": {
+          "city": "Cambridge",
+          "country": "United States",
+          "latitude": 42.381895461019,
+          "longitude": -71.123943328857,
+          "state": "MA",
+          "street": "60 Linnaean St",
+          "zip": "02138"
+        },
+        "id": "278980268795156"
+      },
+      "start_time": "2016-10-30T20:00:00-0400",
+      "id": "520249594848780"
+    },
+  ],
+  "paging": {
+    "cursors": {
+      "before": "QVFIUnFFelBfSFBMOUdwakFNcDA3eVZAzUUEzNEJ0VjQ3ZAzJfSFpsU1p6OTNtd2VlOWFoQ19PWGVfVW0yYUJBWWNWREhZATHlQN25HbHNnMXJUQkZAXQlFwaURB",
+      "after": "QVFIUlphODhDY0RUS0FyMHlfMlhMZAVNITXpvUzY1dS0zUzBsczhvVTdCUXRJUnVVYTJCcm5fZAjJzaTBNb1RLYTdCZAUlwQXpRYU1UWldUcDM2ZAnFvX18wcmFR"
+    },
+    "next": "https://graph.facebook.com/v2.11/278980268795156/events?access_token=EAACZAOA4bVZA0BADirvmJzRy2oYX2pYZCRDWAElwwOuPQqZCwvs95KLbpMpuAKZB3Np5UQkWFen2GZA9BLZAEpF2dMwZA0Ky6SF1hpo09eB43nJodcqqZBJj1T8YhTX3VLQDroJRdwk0fQA8qa81lh8v9WZBR3n6ZB7KvogZAYLLIv9jTPo4nCXvskQmlbWjDHPZCB9cZD&pretty=0&limit=25&after=QVFIUlphODhDY0RUS0FyMHlfMlhMZAVNITXpvUzY1dS0zUzBsczhvVTdCUXRJUnVVYTJCcm5fZAjJzaTBNb1RLYTdCZAUlwQXpRYU1UWldUcDM2ZAnFvX18wcmFR"
+  }
+}

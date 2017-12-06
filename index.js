@@ -114,6 +114,7 @@ function handleMessage(sender_psid, received_message) {
 
 	// Checks if the message contains text
   if (received_message.text) {
+
     // Create the payload for a basic text message, which will be added to the body of our request to the Send API
     response = {
 		"attachment": {
@@ -125,16 +126,16 @@ function handleMessage(sender_psid, received_message) {
 					"subtitle": "Friday or Saturday?",
 					"image_url": "http://c8.alamy.com/comp/F7GDGY/john-harvard-statue-in-harvard-yard-in-autumn-fall-in-cambridge-massachusetts-F7GDGY.jpg",
 					"buttons": [{
-						"type": "web_url",
-						"url": "https://www.messenger.com",
-						"title": "Friday JSON" },
-						{
-						"type": "web_url",
-						"url": "https://www.messenger.com",
-						"title": "Saturday JSON",
-					}],
-				},
-				]
+            "type": "postback",
+            "title": "Friday!",
+            "payload": "Friday",
+          },
+          {
+            "type": "postback",
+            "title": "Saturday!",
+            "payload": "Saturday",
+          }],
+		    }]
 			}
 		}
     };
@@ -183,9 +184,9 @@ function handlePostback(sender_psid, received_postback) {
 
   // Set the response based on the postback payload
   if (payload === 'Friday') {
-    response = { "text": "This is what is happening Friday!" };
+    response = { loadqhJSON };
   } else if (payload === 'Saturday') {
-    response = { "text": "This is what is happening Saturday." };
+    response = { loadcabJSON };
   }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
@@ -217,3 +218,31 @@ function callSendAPI(sender_psid, response) {
   });
 }
 
+
+function loadcabJSON(callback) {
+
+    let xobj = new XMLHttpRequest();
+        xobj.overrideMimeType("application/json");
+    xobj.open('GET', 'cabcaf.json', true);
+    xobj.onreadystatechange = function () {
+          if (xobj.readyState == 4 && xobj.status == "200") {
+            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+            callback(xobj.responseText);
+          }
+    };
+    xobj.send(null);
+}
+
+function loadqhJSON(callback) {
+
+    let xobj = new XMLHttpRequest();
+        xobj.overrideMimeType("application/json");
+    xobj.open('GET', 'queenshead.json', true);
+    xobj.onreadystatechange = function () {
+          if (xobj.readyState == 4 && xobj.status == "200") {
+            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+            callback(xobj.responseText);
+          }
+    };
+    xobj.send(null);
+}
