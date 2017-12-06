@@ -58,21 +58,20 @@ app.post('/webhook', (req, res) => {
       let sender_psid = webhook_event.sender.id;
       console.log('Sender PSID: ' + sender_psid);
 
-      // Check if the event is a message or postback and
-      // pass the event to the appropriate handler function
+      // Check if the event is a message or postback and pass the event to the appropriate handler function
       if (webhook_event.message) {
         handleMessage(sender_psid, webhook_event.message);
       }
       else if (webhook_event.postback) {
         handlePostback(sender_psid, webhook_event.postback);
       }
-
     });
 
     // Return a '200 OK' response to all events
     res.status(200).send('EVENT_RECEIVED');
 
-  } else {
+  }
+  else {
     // Return a '404 Not Found' if event is not from a page subscription
     res.sendStatus(404);
   }
@@ -100,8 +99,8 @@ app.get('/webhook', (req, res) => {
       // Respond with 200 OK and challenge token from the request
       console.log('WEBHOOK_VERIFIED');
       res.status(200).send(challenge);
-
     }
+
     else {
       // Responds with '403 Forbidden' if verify tokens do not match
       res.sendStatus(403);
@@ -118,7 +117,7 @@ function handleMessage(sender_psid, received_message) {
     // Create the payload for a basic text message, which
     // will be added to the body of our request to the Send API
     response = {
-      "text": `You sent the message: "${received_message.text}". Now send me an attachment!`
+      "text": `You said  "${received_message.text}". Now send me an attachment!`
     };
   } else if (received_message.attachments) {
     // Get the URL of the message attachment
