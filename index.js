@@ -125,20 +125,19 @@ function handleMessage(sender_psid, received_message) {
 					"subtitle": "Friday or Saturday?",
 					"image_url": "http://c8.alamy.com/comp/F7GDGY/john-harvard-statue-in-harvard-yard-in-autumn-fall-in-cambridge-massachusetts-F7GDGY.jpg",
 					"buttons": [{
-						"type": "postback",
-						"title": "Friday Events",
-						"payload": "Friday",
-					}],
-				},
-						[{
+						"type": "web_url",
+						"url": "https://www.messenger.com",
+						"title": "Friday JSON" },
+						{
 						"type": "web_url",
 						"url": "https://www.messenger.com",
 						"title": "Saturday JSON",
 					}],
+				},
 				]
 			}
 		}
-	};
+    };
   }
 
 	else if (received_message.attachments) {
@@ -217,3 +216,4 @@ function callSendAPI(sender_psid, response) {
     }
   });
 }
+
