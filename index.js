@@ -186,7 +186,6 @@ function handlePostback(sender_psid, received_postback) {
   if (payload === 'qh') {
     response == readTextFile("workspace/harvard-event-tracker/json/queenshead.json", function(text){
       let json_qh = require('./queenshead.json');
-      console.log(typeof json_qh);
       for (let index_qh = 0; index_qh < 4; index_qh++)
       {
           console.log(json_qh.data[index].name + ' | ' + json_qh.data[index].start_time + ' to ' + json_qh.data[index].end_time);
