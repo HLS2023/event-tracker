@@ -116,28 +116,22 @@ function handleMessage(sender_psid, received_message) {
 			"payload": {
 				"template_type": "generic",
 				"elements": [{
-					"title": "What am I doing here?",
-					"subtitle": "Who are we?",
-					"image_url": "http://messengerdemo.parseapp.com/img/rift.png",
+					"title": "Are you looking for information about Friday or Saturday?",
+					"subtitle": "Are you looking for information about Friday or Saturday?",
+					"image_url": "http://c8.alamy.com/comp/F7GDGY/john-harvard-statue-in-harvard-yard-in-autumn-fall-in-cambridge-massachusetts-F7GDGY.jpg",
 					"buttons": [{
 						"type": "web_url",
 						"url": "https://www.messenger.com",
-						"title": "web url"
-					}, {
+						"title": "Friday JSON"
+					  },
+						{
 						"type": "postback",
-						"title": "Postback",
-						"payload": "Payload for first element in a generic bubble",
+						"url": "https://www.messenger.com",
+						"title": "Saturday JSON",
+						"payload": "saturday",
 					}],
-				}, {
-					"title": "Where are we going?",
-					"subtitle": "Where did we come from?",
-					"image_url": "http://messengerdemo.parseapp.com/img/gearvr.png",
-					"buttons": [{
-						"type": "postback",
-						"title": "Postback",
-						"payload": "Payload for second element in a generic bubble",
-					}],
-				}]
+				},
+				]
 			}
 		}
 	};
@@ -154,10 +148,10 @@ function handlePostback(sender_psid, received_postback) {
   let payload = received_postback.payload;
 
   // Set the response based on the postback payload
-  if (payload === 'friday') {
-    response = { "text": "Thanks!" };
-  } else if (payload === 'saturday') {
-    response = { "text": "Oops, try sending another image." };
+  if (payload === 'Friday') {
+    response = { "text": "This is what is happening Friday!" };
+  } else if (payload === 'Saturday') {
+    response = { "text": "This is what is happening Saturday." };
   }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
