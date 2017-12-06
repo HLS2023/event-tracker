@@ -1,65 +1,17 @@
-// Citations:
-// 1. Google Calendar API, https://developers.google.com/google-apps/calendar/quickstart/js
-
-const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
-
-'use strict';
-
-// Imports dependencies and sets up http server
-// Also sets variables for Google Calendar API authorization
 const
   // Express HTTP
   request = require('request'),
   express = require('express'),
   body_parser = require('body-parser'),
-  app = express().use(body_parser.json()),
-  // Google Calendar
-  fs = require('fs'),
-  readline = require('readline'),
-  google = require('googleapis'),
-  googleAuth = require('google-auth-library');
-
-// Global variable array for four House calendars:
-// PfoHo (Igloo), Kirkland House, Mather House, and Adams House
-let housecalendarids = ['0spevsj3f418i587nsipqdoppk@group.calendar.google.com',
-                        'kirkland.website@gmail.com',
-                        'mather.calendar@gmail.com',
-                        'adamshousetutors@gmail.com'];
-
-// Global variable arrays storing start times/dates, end times/dates, and event summaries.
-let allevents = [];
-let allstarts = [];
-let allends = [];
-let allsummaries = [];
-
-// If modifying these scopes, delete your previously saved credentials
-// at ~/.credentials/calendar-nodejs-quickstart.json
-let SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'];
-let TOKEN_DIR = (process.env.HOME || process.env.HOMEPATH ||
-    process.env.USERPROFILE) + '/.credentials/';
-let TOKEN_PATH = TOKEN_DIR + 'calendar-nodejs-quickstart.json';
-
-// Load client secrets from a local file.
-fs.readFile('client_secret.json', function processClientSecrets(err, content) {
-  if (err) {
-    console.log('Error loading client secret file: ' + err);
-    return;
-  }
-  // Authorize a client with the loaded credentials, then call the
-  // Google Calendar API.
-  authorize(JSON.parse(content), listEvents);
-});
-
+  app = express().use(body_parser.json());
 
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
-
 
 // Server index page
 app.get("/", function (req, res) {
   res.send("Deployed!");
 });
-
 
 // Accepts GET requests at the /webhook endpoint
 app.get('/webhook', (req, res) => {
@@ -239,120 +191,4 @@ function callSendAPI(sender_psid, response) {
       console.error("Unable to send message:" + err);
     }
   });
-}
-
-function authorize(credentials, callback) {
-  let clientSecret = credentials.installed.client_secret;
-  let clientId = credentials.installed.client_id;
-  let redirectUrl = credentials.installed.redirect_uris[0];
-  let auth = new googleAuth();
-  let oauth2Client = new auth.OAuth2(clientId, clientSecret, redirectUrl);
-
-  // Check if we have previously stored a token.
-  fs.readFile(TOKEN_PATH, function(err, token) {
-    if (err) {
-      getNewToken(oauth2Client, callback);
-    } else {
-      oauth2Client.credentials = JSON.parse(token);
-      callback(oauth2Client);
-    }
-  });
-}
-
-/**
- * Get and store new token after prompting for user authorization, and then
- * execute the given callback with the authorized OAuth2 client.
- *
- * @param {google.auth.OAuth2} oauth2Client The OAuth2 client to get token for.
- * @param {getEventsCallback} callback The callback to call with the authorized
- *     client.
- */
-function getNewToken(oauth2Client, callback) {
-  let authUrl = oauth2Client.generateAuthUrl({
-    access_type: 'offline',
-    scope: SCOPES
-  });
-  console.log('Authorize this app by visiting this url: ', authUrl);
-  let rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-  });
-  rl.question('Enter the code from that page here: ', function(code) {
-    rl.close();
-    oauth2Client.getToken(code, function(err, token) {
-      if (err) {
-        console.log('Error while trying to retrieve access token', err);
-        return;
-      }
-      oauth2Client.credentials = token;
-      storeToken(token);
-      callback(oauth2Client);
-    });
-  });
-}
-
-/**
- * Store token to disk be used in later program executions.
- *
- * @param {Object} token The token to store to disk.
- */
-function storeToken(token)
-{
-  try
-  {
-    fs.mkdirSync(TOKEN_DIR);
-  } catch (err) {
-    if (err.code != 'EEXIST')
-    {
-      throw err;
-    }
-  }
-  fs.writeFile(TOKEN_PATH, JSON.stringify(token));
-  console.log('Token stored to ' + TOKEN_PATH);
-}
-
-/**
- * Lists the next 4 events on each of the four houses' calendars.
- *
- * @param {google.auth.OAuth2} auth, an authorized OAuth2 client.
- */
-function listEvents(auth)
-{
-  let calendar = google.calendar('v3');
-  for (let i = 0; i < housecalendarids.length; i++)
-  {
-    calendar.events.list(
-    {
-      auth: auth,
-      calendarId: housecalendarids[i],
-      timeMin: (new Date()).toISOString(),
-      maxResults: 4,
-      singleEvents: true,
-      orderBy: 'startTime'
-    },
-    function(err, response)
-    {
-      if (err) {
-        console.log('The API returned an error: ' + err);
-        return;
-      }
-      let events = response.items;
-      if (events.length == 0)
-      {
-        console.log('No upcoming events in calendar.');
-      }
-      else
-      {
-        for (let j = 0; j < events.length; j++) {
-          let event = events[j];
-          let start = event.start.dateTime || event.start.date;
-          let end = event.end.dateTime || event.end.date;
-          allevents.push(event);
-          allstarts.push(start);
-          allends.push(end);
-          allsummaries.push(event.summary);
-        }
-      }
-    });
-  }
 }
