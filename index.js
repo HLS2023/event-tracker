@@ -188,7 +188,7 @@ function handlePostback(sender_psid, received_postback) {
     let json_qh = require('./queenshead.json');
     for (let index_qh = 0; index_qh < 4; index_qh++)
     {
-        response == json_qh.data[index].name + ' | ' + json_qh.data[index].start_time + ' to ' + json_qh.data[index].end_time;
+        response == json_qh.data[index_qh].name + ' | ' + json_qh.data[index_qh].start_time + ' to ' + json_qh.data[index_qh].end_time;
     }
   ]
 
