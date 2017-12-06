@@ -161,22 +161,7 @@ function listEvents(auth)
   }
 }
 
-
-/**
- * Copyright 2017-present, Facebook, Inc. All rights reserved.
- *
- * This source code is licensed under the license found in the
- * LICENSE file in the root directory of this source tree.
- *
- *
- * Starter Project for Messenger Platform Quick Start Tutorial
- *
- * Use this project as the starting point for following the
- * Messenger Platform quick start tutorial.
- *
- * https://developers.facebook.com/docs/messenger-platform/getting-started/quick-start/
- *
- */
+/* Facebook API */
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
@@ -348,7 +333,7 @@ function handlePostback(sender_psid, received_postback) {
 
   // Set the response based on the postback payload
   if (payload === 'Friday') {
-    response = { "text": allevents };
+    response = { "text": allsummaries[0] };
   } else if (payload === 'Saturday') {
     response = { "text": "This is what is happening Saturday." };
   }
