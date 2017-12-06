@@ -1,3 +1,7 @@
+const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+
+'use strict';
+
 const
   // Express HTTP
   request = require('request'),
