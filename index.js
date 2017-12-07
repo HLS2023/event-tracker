@@ -207,11 +207,11 @@ function handlePostback(sender_psid, received_postback) {
       let json_cc = require('./cabcaf.jsaon');
       for (let index_cc = 0; index_cc < 4; index_cc++)
       {
-          reply.push(json_cc.data[index_cc].name + ' | ' + json_cc.data[index_cc].start_time + ' to ' + json_cc.data[index_cc].end_time);
+          response = (json_cc.data[index_cc].name + ' | ' + json_cc.data[index_cc].start_time + ' to ' + json_cc.data[index_cc].end_time);
       }
-      response = { "text": "reply[0] + '\n' + reply[1] + '\n' + reply[2] + '\n' + reply[3] + '\n'"
       };
   }
+
 
   else if (payload === 'pfoho') {
     response = {"text": "Pfoho response!"};
