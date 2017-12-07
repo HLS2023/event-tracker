@@ -172,30 +172,24 @@ function handleMessage(sender_psid, received_message) {
 
 function handlePostback(sender_psid, received_postback) {
   let response;
-
   // Get the payload for the postback
   let payload = received_postback.payload;
 
   // Set the response based on the postback payload
-  if (payload === 'qh') {
-    response == readTextFile("workspace/harvard-event-tracker/json/queenshead.json", function(text){
+  if (payload == 'qh') {
       let json_qh = require('./queenshead.json');
-      console.log(typeof json_qh);
       for (let index_qh = 0; index_qh < 4; index_qh++)
       {
-          console.log(json_qh.data[index].name + ' | ' + json_qh.data[index].start_time + ' to ' + json_qh.data[index].end_time);
+          response = json_qh.data[index_qh].name + ' | ' + json_qh.data[index_qh].start_time + ' to ' + json_qh.data[index_qh].end_time;
       }
-    });
   }
-    else if (payload === 'cabcaf') {
-     response == readTextFile("workspace/harvard-event-tracker/json/cabcaf.json", function(text){
+
+  else if (payload == 'cabcaf') {
       let json_cabcaf = require('./cabcaf.json');
-      console.log(typeof json_cabcaf);
       for (let index_cabcaf = 0; index_cabcaf < 4; index_cabcaf++)
       {
-          console.log(json_cabcaf.data[index].name + ' | ' + json_cabcaf.data[index].start_time + ' to ' + json_cabcaf.data[index].end_time);
+          response = json_cabcaf.data[index_cabcaf].name + ' | ' + json_cabcaf.data[index_cabcaf].start_time + ' to ' + json_cabcaf.data[index_cabcaf].end_time;
       }
-    });
   }
 
   // Send the message to acknowledge the postback
