@@ -188,6 +188,7 @@ function handleMessage(sender_psid, received_message) {
 
 function handlePostback(sender_psid, received_postback) {
   let response;
+  let reply;
   // Get the payload for the postback
   let payload = received_postback.payload;
 
@@ -196,16 +197,18 @@ function handlePostback(sender_psid, received_postback) {
       let json_qh = require('./queenshead.json');
       for (let index_qh = 0; index_qh < 4; index_qh++)
       {
-          response = {"text": json_qh.data[index_qh].name + ' | ' + json_qh.data[index_qh].start_time + ' to ' + json_qh.data[index_qh].end_time};
+          reply.push(json_qh.data[index_qh].name + ' | ' + json_qh.data[index_qh].start_time + ' to ' + json_qh.data[index_qh].end_time);
       }
+      response = {"text": reply[0] + '\n' + reply[1] + '\n' + reply[2] + '\n' + reply[3] + '\n'};
   }
 
   else if (payload === 'cabcaf') {
       let json_cc = require('./cabcaf.jsaon');
       for (let index_cc = 0; index_cc < 4; index_cc++)
       {
-          response = {"text": json_cc.data[index_cc].name + ' | ' + json_cc.data[index_cc].start_time + ' to ' + json_cc.data[index_cc].end_time};
+          reply.push(json_cc.data[index_cc].name + ' | ' + json_cc.data[index_cc].start_time + ' to ' + json_cc.data[index_cc].end_time);
       }
+      response = {"text": reply[0] + '\n' + reply[1] + '\n' + reply[2] + '\n' + reply[3] + '\n'};
   }
 
   else if (payload === 'pfoho') {
