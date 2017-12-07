@@ -213,9 +213,9 @@ function handlePostback(sender_psid, received_postback) {
         "payload": {
           "template_type": "generic",
           "elements": [{
-            "title": "This is what's going on in Pfoho!",
-            "subtitle": "Events for both Friday and Saturday",
-            "image_url": "https://c1.staticflickr.com/9/8350/8195210264_4b6b10e6bc_b.jpg"
+            "title": "December 8th, 7pm",
+            "subtitle": "(tentative) Private Event @Igloo",
+            "image_url": "https://c1.staticflickr.com/9/8350/8195210264_4b6b10e6bc_b.jpg",
             }]
           }
       }
@@ -251,3 +251,18 @@ function callSendAPI(sender_psid, response) {
     }
   });
 }
+
+// CITATIONS
+/**
+ * Citations:
+ * The main tutorial we used. Helped us set up Node and Heroku in the Terminal and creating compatibility among different platforms (Facebook, Heroku) via Git and the access tokens, setting up webhooks. https://www.sitepoint.com/building-facebook-chat-bot-node-heroku
+ * Messenger's own API (from which the skeleton of index.js is built from): https://github.com/fbsamples/messenger-platform-samples
+ * Another Git repository that we used before Messenger's API: https://github.com/jw84/messenger-bot-tutorial
+ * Very useful for setting up the chatbot itself: buttons, replies, postbacks and payloads:  https://developers.facebook.com/docs/messenger-platform/getting-started/quick-start
+ * Brian Yu's INCREDIBLY helpful guide to setting up Heroku: https://manual.cs50.net/heroku/2017/fall/psets/7/finance
+ * A Facebook bot tutorial that explained the basics of setting up the Facebook side of the bot: page, developer tools account, page token: https://medium.com/mindlayer/for-beginners-a-facebook-bot-tutorial-3bb2063091c7
+ * Facebook's templates for buttons: https://developers.facebook.com/docs/messenger-platform/send-messages/buttons
+ * Helped with downloading and using the Heroku CLI: https://devcenter.heroku.com/articles/heroku-cli#npm
+ * Developer site that shows tokens: https://developers.facebook.com/apps/168466033890717/messenger/
+ * Developer platform tester which handles HTTP requests (this one is for Cabot Cafe in particular), assumes you have a Facebook account to log into: https://developers.facebook.com/tools/explorer/?method=GET&path=278980268795156%2Fevents%3Faccess_token%3D168466033890717EAACZAOA4bVZA0BAA25RtwQ5Rd2LhaKMYfGvYlvIKZCWF1ZAxXBgAn5mW51m7dAvAiq9CgZAhPHFf7ujCV3eTYg8OujMZCHYZAIKp5THaHZAdgk36d0WnGVwbJFJaF2TPKZACRCBq3Wx1JzoI6XZBB4PtSo7ZC6WEN1mrpwYSxypCf9RznOzaWMcMO1a&version=v2.11
+**/
