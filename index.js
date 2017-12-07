@@ -193,6 +193,7 @@ function handlePostback(sender_psid, received_postback) {
   if (payload === 'get_started') {
         response = { "text": `Welcome to the Harvard EventTracker Bot! Say "hi" to learn more.`};
   }
+
   // Set the response based on the postback payload
   // else if (payload === 'qh') {
   //     let json_qh = require('./queenshead.json');
