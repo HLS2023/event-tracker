@@ -116,14 +116,34 @@ function handleMessage(sender_psid, received_message) {
 					"buttons":
 					[
 				 	{
-             "type": "postback",
-             "title": "Cabot Cafe!",
-           "payload": "cabcaf",
+              "type": "postback",
+              "title": "Cabot Cafe!",
+              "payload": "cabcaf",
            },
            {
              "type": "postback",
              "title": "Queen's Head!",
              "payload": "qh",
+           },
+           {
+            "type": "postback",
+            "title": "Pforzheimer House (Igloo)!",
+            "payload": "pfoho",
+          },
+          {
+            "type": "postback",
+            "title": "Adams House!",
+            "payload": "adams",
+          },
+          {
+            "type": "postback",
+            "title": "Kirkland House!",
+            "payload": "kirkland",
+          },
+          {
+            "type": "postback",
+            "title": "Mather House!",
+            "payload": "mather",
           }],
 		    }]
 			}
@@ -177,6 +197,22 @@ function handlePostback(sender_psid, received_postback) {
 
   else if (payload === 'cabcaf') {
     response = {"text": "Pfoho response!"};
+  }
+
+  else if (payload === 'pfoho') {
+    response = {"text": "Pfoho response!"};
+  }
+
+  else if (payload === 'adams') {
+    response = {"text": "Adams response!"};
+  }
+
+  else if (payload === 'kirkland') {
+    response = {"text": "Kirkland response!"};
+  }
+
+  else if (payload === 'mather') {
+    response = {"text": "Mather response!"};
   }
 
   // Send the message to acknowledge the postback
