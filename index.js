@@ -113,9 +113,7 @@ function handleMessage(sender_psid, received_message) {
 					"title": "What are you looking for?",
 					"subtitle": "Choose the venue to see what events are going on?",
 					"image_url": "http://www.universityevents.harvard.edu/sites/universityevents.harvard.edu/files/venue_gallderies/queenspub_gallery_2_0.jpg",
-					"buttons":
-					[
-				 	{
+					"buttons": [{
               "type": "postback",
               "title": "Cabot Cafe!",
               "payload": "cabcaf",
@@ -129,21 +127,6 @@ function handleMessage(sender_psid, received_message) {
             "type": "postback",
             "title": "Pforzheimer House (Igloo)!",
             "payload": "pfoho",
-          },
-          {
-            "type": "postback",
-            "title": "Adams House!",
-            "payload": "adams",
-          },
-          {
-            "type": "postback",
-            "title": "Kirkland House!",
-            "payload": "kirkland",
-          },
-          {
-            "type": "postback",
-            "title": "Mather House!",
-            "payload": "mather",
           }],
 		    }]
 			}
@@ -201,18 +184,6 @@ function handlePostback(sender_psid, received_postback) {
 
   else if (payload === 'pfoho') {
     response = {"text": "Pfoho response!"};
-  }
-
-  else if (payload === 'adams') {
-    response = {"text": "Adams response!"};
-  }
-
-  else if (payload === 'kirkland') {
-    response = {"text": "Kirkland response!"};
-  }
-
-  else if (payload === 'mather') {
-    response = {"text": "Mather response!"};
   }
 
   // Send the message to acknowledge the postback
