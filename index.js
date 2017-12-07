@@ -175,15 +175,57 @@ function handlePostback(sender_psid, received_postback) {
 
   // Set the response based on the postback payload
   if (payload === 'qh') {
-    response = { "text": "Please work!" };
+    response = {
+		"attachment": {
+			"type": "template",
+			"payload": {
+				"template_type": "generic",
+				"elements": [{
+					"title": "Which date are you looking for?",
+					"subtitle": "Cambridge Queen's Head Pub?",
+					"image_url": "http://www.universityevents.harvard.edu/sites/universityevents.harvard.edu/files/venue_gallderies/queenspub_gallery_2_0.jpg",
+					"buttons": [{
+              "type": "postback",
+              "title": "November 11th—10pm: Claire Dickson is a Boston-based jazz, pop, and R&B vocalist-composer. Supported by Gabe Fox-Peck(keyboard), Sam Firebush (keyboard), Avery Logan (drums) 9pm: fine&YIKES is a minimalist rock cover band that doesn’t pull any punches feat. Eddy Walda Milo Davidson Jess Erion. HUID +1",
+           },
+           {
+             "type": "postback",
+             "title": "November 16th—Harvard College Latin Band is a brand new ensemble aimed at performing Latin music and promoting Latinx culture throughout campus, Boston, and beyond! We perform a range of styles from salsa to boleros and want to get everyone dancing!",
+          }],
+		    }]
   }
 
   else if (payload === 'cabcaf') {
-    response = {"text": "Pfoho response!"};
+    response = {
+      "attachment": {
+      			"type": "template",
+      			"payload": {
+      				"template_type": "generic",
+      				"elements": [{
+      					"title": "Which date are you looking for?",
+      					"subtitle": "Cabot Café?",
+      					"image_url": "https://www.facebook.com/cabotcafe/photos/a.748314161861762.1073741825.278980268795156/1996188620407637/?type=3&theater",
+      					"buttons": [{
+                    "type": "postback",
+                    "title": "November 1st—10pm: Join Cabot Café in a tea tasting with local provider Mem Tea! We'll learn about growth, production, and taste profiles of White, Green, Oolong, Black, and Herbal teas. Brewing, serving, and **tasting** will also be covered!",
+                 }],
+      		    }]
   }
 
   else if (payload === 'pfoho') {
-    response = {"text": "Pfoho response!"};
+    response = {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [{
+            "title": "This is what's going on in Pfoho!",
+            "subtitle": "Events for both Friday and Saturday",
+            "image_url": "https://c1.staticflickr.com/9/8350/8195210264_4b6b10e6bc_b.jpg"
+            }]
+          }
+      }
+    };
   }
 
   // Send the message to acknowledge the postback
