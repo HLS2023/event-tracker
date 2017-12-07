@@ -209,6 +209,22 @@ function handlePostback(sender_psid, received_postback) {
       }
   }
 
+  else if (payload == 'pfoho') {
+    response = 'Pfoho response!';
+  }
+
+  else if (payload == 'adams') {
+    response = 'Adams response!';
+  }
+
+  else if (payload == 'kirkland') {
+    response = 'Kirkland response!';
+  }
+
+  else if (payload == 'mather') {
+    response = 'Mather response!';
+  }
+
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
 }
