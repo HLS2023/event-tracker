@@ -1,14 +1,8 @@
 /**
  * Copyright 2017-present, Facebook, Inc. All rights reserved.
- *
- * This source code is licensed under the license found in the
- * LICENSE file in the root directory of this source tree.
- *
- *
  * Starter Project for Messenger Platform Quick Start Tutorial
  *
- * Use this project as the starting point for following the
- * Messenger Platform quick start tutorial.
+ * Use this project as the starting point for following the Messenger Platform quick start tutorial.
  *
  * https://developers.facebook.com/docs/messenger-platform/getting-started/quick-start/
  *
@@ -183,19 +177,26 @@ function handlePostback(sender_psid, received_postback) {
   let payload = received_postback.payload;
 
   // Set the response based on the postback payload
-  if (payload === 'qh')
-  {
-    let json_qh = require('./queenshead.json');
-    for (let index_qh = 0; index_qh < 4; index_qh++)
-    {
-        response == json_qh.data[index_qh].name + ' | ' + json_qh.data[index_qh].start_time + ' to ' + json_qh.data[index_qh].end_time;
-    }
-  ]
-
-  else if (payload === 'cabcaf') {
-  response == 'Cabot Cafe response!'
-  // $.getJSON("json", parameters, function(data) }
-
+  if (payload === 'qh') {
+    response == readTextFile("workspace/harvard-event-tracker/json/queenshead.json", function(text){
+      let json_qh = require('./queenshead.json');
+      console.log(typeof json_qh);
+      for (let index_qh = 0; index_qh < 4; index_qh++)
+      {
+          console.log(json_qh.data[index].name + ' | ' + json_qh.data[index].start_time + ' to ' + json_qh.data[index].end_time);
+      }
+    });
+  }
+    else if (payload === 'cabcaf') {
+     response == readTextFile("workspace/harvard-event-tracker/json/cabcaf.json", function(text){
+      let json_cabcaf = require('./cabcaf.json');
+      console.log(typeof json_cabcaf);
+      for (let index_cabcaf = 0; index_cabcaf < 4; index_cabcaf++)
+      {
+          console.log(json_cabcaf.data[index].name + ' | ' + json_cabcaf.data[index].start_time + ' to ' + json_cabcaf.data[index].end_time);
+      }
+    });
+  }
 
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
