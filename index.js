@@ -202,13 +202,9 @@ function handlePostback(sender_psid, received_postback) {
       			"type": "template",
       				"template_type": "generic",
       				"elements": [{
-      					"title": "Which date are you looking for?",
-      					"subtitle": "Cabot Café?",
+      					"title": "November 1st, 10pm",
+      					"subtitle": "Join Cabot Café in a tea tasting with local provider Mem Tea! We'll learn about growth, production, and taste profiles of White, Green, Oolong, Black, and Herbal teas. Brewing, serving, and **tasting** will also be covered!",
       					"image_url": "https://www.facebook.com/cabotcafe/photos/a.748314161861762.1073741825.278980268795156/1996188620407637/?type=3&theater",
-      					"buttons": [{
-                    "type": "postback",
-                    "title": "November 1st—10pm: Join Cabot Café in a tea tasting with local provider Mem Tea! We'll learn about growth, production, and taste profiles of White, Green, Oolong, Black, and Herbal teas. Brewing, serving, and **tasting** will also be covered!",
-                 }],
       		  }]
         }
       };
