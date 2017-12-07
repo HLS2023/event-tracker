@@ -1,3 +1,11 @@
+/**
+* This was all generated via node.js when we
+* first began the project. This contains the
+* name of our project and the initial Git
+* repository we used to get the code.
+**/
+
+
 {
   "name": "harvard-event-tracker",
   "version": "1.0.0",

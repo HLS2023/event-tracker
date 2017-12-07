@@ -114,6 +114,8 @@ function storeToken(token)
 function listEvents(auth)
 {
   let calendar = google.calendar('v3');
+
+  // Iterates over each of the four public House calendars by their public Google Calendar IDs.
   for (let i = 0; i < housecalendarids.length; i++)
   {
     calendar.events.list(
@@ -138,6 +140,8 @@ function listEvents(auth)
       }
       else
       {
+
+        // Iterates over list of events within the calendar, capped at 4 from maxResults.
         for (let j = 0; j < events.length; j++) {
           let event = events[j];
           let start = event.start.dateTime || event.start.date;
@@ -148,6 +152,7 @@ function listEvents(auth)
           allends.push(end);
           allsummaries.push(summary);
         }
+
       // Logs all event summaries (within maxResults: 4) from each of the four calendars to the console for error-checking.
       console.log(allsummaries, allstarts, allends);
       }
@@ -157,7 +162,7 @@ function listEvents(auth)
 
 // Plan: stitch this code into index.js and write a function to pass these Google Calendar events into Messenger chatbot payloads.
 // Problem: Google Calendar authorization (OAuth) and Facebook Messenger authorization are not working together in one .js file.
-// Other problem: the allsummaries array could not be passed between two separate .js files.
+// Other problem: the allsummaries array could not be passed between two separate .js files because of the asynchronous functionality.
 
 /**
  * Citation:

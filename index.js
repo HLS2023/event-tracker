@@ -8,11 +8,12 @@
  *
 **/
 
+// This has our confidential page access token saved.
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
 'use strict';
 
-// Imports dependencies and set up http server
+// Imports dependencies and sets up http server.
 const
   request = require('request'),
   express = require('express'),
@@ -24,7 +25,7 @@ const
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
 
-// Server index page
+// Server index page (accessible via Heroku. Just checks whether the app is live or not.)
 app.get("/", function (req, res) {
   res.send("Deployed!");
 });
@@ -42,16 +43,15 @@ app.post('/webhook', (req, res) => {
     // Iterate over each entry - there may be multiple if batched
     body.entry.forEach(function(entry) {
 
-      // Get the webhook event. entry.messaging is an array, but
-      // will only ever contain one event, so we get index 0
+      // Get the webhook event. entry.messaging is an array, but will only ever contain one event, so we get index 0
       let webhook_event = entry.messaging[0];
       console.log(webhook_event);
 
-      // Get the sender PSID
+      // Gets the sender PSID
       let sender_psid = webhook_event.sender.id;
       console.log('Sender PSID: ' + sender_psid);
 
-      // Check if the event is a message or postback and pass the event to the appropriate handler function
+      // Checks if the event is a message or postback and passes the event to the appropriate handler function
       if (webhook_event.message) {
         handleMessage(sender_psid, webhook_event.message);
       }
@@ -103,16 +103,19 @@ function handleMessage(sender_psid, received_message) {
 
 	// Checks if the message contains text
   if (received_message.text) {
+
     // Create the payload for a basic text message, which will be added to the body of our request to the Send API
     response = {
 		"attachment": {
 			"type": "template",
 			"payload": {
 				"template_type": "generic",
+				// Designs the body of the main message
 				"elements": [{
 					"title": "What are you looking for?",
 					"subtitle": "Choose the venue to see what events are going on?",
 					"image_url": "http://www.universityevents.harvard.edu/sites/universityevents.harvard.edu/files/venue_gallderies/queenspub_gallery_2_0.jpg",
+					// Buttons which list the different options available
 					"buttons": [{
               "type": "postback",
               "title": "Cabot Cafe!",
@@ -133,7 +136,7 @@ function handleMessage(sender_psid, received_message) {
 		}
     };
   }
-
+  // From the generic template, not likely to be used in everyday use of the chatbot.
 	else if (received_message.attachments) {
     // Get the URL of the message attachment
     let attachment_url = received_message.attachments[0].payload.url;
@@ -170,10 +173,12 @@ function handleMessage(sender_psid, received_message) {
 
 function handlePostback(sender_psid, received_postback) {
   let response;
+
   // Get the payload for the postback
   let payload = received_postback.payload;
 
   // Set the response based on the postback payload
+  // If payload is for Cambridge Queen's Head venue, displays most recent event (since Queen's Head stopped publicizing events for the semester)
   if (payload === 'qh') {
     response = {
        "attachment": {
@@ -190,6 +195,7 @@ function handlePostback(sender_psid, received_postback) {
     };
   }
 
+  // Else if payload is for Cabot Cafe venue, displays most recent event (since Cabot Cafe stopped publicizing events for the semester)
   else if (payload === 'cabcaf') {
     response = {
       "attachment": {
@@ -206,6 +212,7 @@ function handlePostback(sender_psid, received_postback) {
     };
   }
 
+  // Else if payload is for a House (specifically, Pfoho), displays next upcoming event
   else if (payload === 'pfoho') {
     response = {
       "attachment": {
@@ -244,6 +251,7 @@ function callSendAPI(sender_psid, response) {
     "method": "POST",
     "json": request_body
   }, (err, res, body) => {
+    // Checks for errors or if able/unable to send message
     if (!err) {
       console.log('Message sent!');
     } else {
