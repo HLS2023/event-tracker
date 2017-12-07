@@ -178,7 +178,6 @@ function handlePostback(sender_psid, received_postback) {
     response = {
 		"attachment": {
 			"type": "template",
-			"payload": {
 				"template_type": "generic",
 				"elements": [{
 					"title": "Which date are you looking for?",
@@ -193,8 +192,7 @@ function handlePostback(sender_psid, received_postback) {
              "title": "November 16th—Harvard College Latin Band is a brand new ensemble aimed at performing Latin music and promoting Latinx culture throughout campus, Boston, and beyond! We perform a range of styles from salsa to boleros and want to get everyone dancing!",
           }],
 		    }]
-      }
-	  }
+	    }
     };
   }
 
@@ -202,7 +200,6 @@ function handlePostback(sender_psid, received_postback) {
     response = {
       "attachment": {
       			"type": "template",
-      			"payload": {
       				"template_type": "generic",
       				"elements": [{
       					"title": "Which date are you looking for?",
@@ -212,17 +209,15 @@ function handlePostback(sender_psid, received_postback) {
                     "type": "postback",
                     "title": "November 1st—10pm: Join Cabot Café in a tea tasting with local provider Mem Tea! We'll learn about growth, production, and taste profiles of White, Green, Oolong, Black, and Herbal teas. Brewing, serving, and **tasting** will also be covered!",
                  }],
-      		    }]
-            }
-      }
-    };
+      		  }]
+        }
+      };
   }
 
   else if (payload === 'pfoho') {
     response = {
       "attachment": {
         "type": "template",
-        "payload": {
           "template_type": "generic",
           "elements": [{
             "title": "This is what's going on in Pfoho!",
@@ -230,9 +225,8 @@ function handlePostback(sender_psid, received_postback) {
             "image_url": "https://c1.staticflickr.com/9/8350/8195210264_4b6b10e6bc_b.jpg"
             }]
           }
-      }
-    };
-  }
+      };
+    }
 
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
