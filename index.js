@@ -115,16 +115,16 @@ function handleMessage(sender_psid, received_message) {
 					"image_url": "http://www.universityevents.harvard.edu/sites/universityevents.harvard.edu/files/venue_gallderies/queenspub_gallery_2_0.jpg",
 					"buttons":
 					[
-				// 	{
-    //         "type": "postback",
-    //         "title": "Cabot Cafe!",
-    //         "payload": "cabcaf",
-    //       },
-    //       {
-    //         "type": "postback",
-    //         "title": "Queen's Head!",
-    //         "payload": "qh",
-    //       },
+				 	{
+             "type": "postback",
+             "title": "Cabot Cafe!",
+           "payload": "cabcaf",
+           },
+           {
+             "type": "postback",
+             "title": "Queen's Head!",
+             "payload": "qh",
+          },
           {
             "type": "postback",
             "title": "Pforzheimer House (Igloo)!",
@@ -190,8 +190,8 @@ function handlePostback(sender_psid, received_postback) {
   // Get the payload for the postback
   let payload = received_postback.payload;
 
-  if (payload === 'get_started') {
-        response = { "text": `Welcome to the Harvard EventTracker Bot! Say "hi" to learn more.`};
+  if (payload === 'qh') {
+    response = { 'text': "Hello!" };
   }
 
   // Set the response based on the postback payload
