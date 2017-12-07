@@ -12,7 +12,6 @@ const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
 'use strict';
 
-
 // Imports dependencies and set up http server
 const
   request = require('request'),
@@ -20,16 +19,13 @@ const
   body_parser = require('body-parser'),
   app = express().use(body_parser.json()); // creates express http server
 
-
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
-
 
 // Server index page
 app.get("/", function (req, res) {
   res.send("Deployed!");
 });
-
 
 // Accepts POST requests at /webhook endpoint
 app.post('/webhook', (req, res) => {
@@ -185,10 +181,10 @@ function handlePostback(sender_psid, received_postback) {
   }
 
   else if (payload == 'cabcaf') {
-      let json_cabcaf = require('./cabcaf.json');
-      for (let index_cabcaf = 0; index_cabcaf < 4; index_cabcaf++)
+      let json_cc = require('./cabcaf.json');
+      for (let index_cc = 0; index_cc < 4; index_cc++)
       {
-          response = json_cabcaf.data[index_cabcaf].name + ' | ' + json_cabcaf.data[index_cabcaf].start_time + ' to ' + json_cabcaf.data[index_cabcaf].end_time;
+          response = json_cc.data[index_cc].name + ' | ' + json_cc.data[index_cc].start_time + ' to ' + json_cc.data[index_cc].end_time;
       }
   }
 
