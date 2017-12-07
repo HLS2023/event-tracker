@@ -200,6 +200,7 @@ function handlePostback(sender_psid, received_postback) {
     response = {
       "attachment": {
       			"type": "template",
+      			"payload": {
       				"template_type": "generic",
       				"elements": [{
       					"title": "November 1st, 10pm",
@@ -207,7 +208,8 @@ function handlePostback(sender_psid, received_postback) {
       					"image_url": "https://www.facebook.com/cabotcafe/photos/a.748314161861762.1073741825.278980268795156/1996188620407637/?type=3&theater",
       		  }]
         }
-      };
+      }
+    };
   }
 
   else if (payload === 'pfoho') {
