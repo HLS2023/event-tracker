@@ -19,13 +19,16 @@ const
   body_parser = require('body-parser'),
   app = express().use(body_parser.json()); // creates express http server
 
+
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
+
 
 // Server index page
 app.get("/", function (req, res) {
   res.send("Deployed!");
 });
+
 
 // Accepts POST requests at /webhook endpoint
 app.post('/webhook', (req, res) => {
@@ -56,16 +59,13 @@ app.post('/webhook', (req, res) => {
         handlePostback(sender_psid, webhook_event.postback);
       }
     });
-
     // Return a '200 OK' response to all events
     res.status(200).send('EVENT_RECEIVED');
-
   }
   else {
     // Return a '404 Not Found' if event is not from a page subscription
     res.sendStatus(404);
   }
-
 });
 
 
@@ -90,7 +90,6 @@ app.get('/webhook', (req, res) => {
       console.log('WEBHOOK_VERIFIED');
       res.status(200).send(challenge);
     }
-
     else {
       // Responds with '403 Forbidden' if verify tokens do not match
       res.sendStatus(403);
@@ -104,7 +103,6 @@ function handleMessage(sender_psid, received_message) {
 
 	// Checks if the message contains text
   if (received_message.text) {
-
     // Create the payload for a basic text message, which will be added to the body of our request to the Send API
     response = {
 		"attachment": {
@@ -188,12 +186,15 @@ function handleMessage(sender_psid, received_message) {
 
 function handlePostback(sender_psid, received_postback) {
   let response;
-  let reply = [];
   // Get the payload for the postback
   let payload = received_postback.payload;
 
+  if (payload === 'get_started') {
+        response = { "text": `Welcome to the Harvard EventTracker Bot! Say "hi" to learn more.` };
+  }
+
   // Set the response based on the postback payload
-  if (payload === 'qh') {
+  else if (payload === 'qh') {
       let json_qh = require('./queenshead.json');
       response = { "text": json_qh.data[0].name + ' | ' + json_qh.data[0].start_time + ' to ' + json_qh.data[0].end_time };
   }
@@ -215,7 +216,7 @@ function handlePostback(sender_psid, received_postback) {
     response = {"text": "Kirkland response!"};
   }
 
-  else if (payload == 'mather') {
+  else if (payload === 'mather') {
     response = {"text": "Mather response!"};
   }
 
