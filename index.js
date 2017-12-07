@@ -124,26 +124,6 @@ function handleMessage(sender_psid, received_message) {
              "type": "postback",
              "title": "Queen's Head!",
              "payload": "qh",
-          },
-          {
-            "type": "postback",
-            "title": "Pforzheimer House (Igloo)!",
-            "payload": "pfoho",
-          },
-          {
-            "type": "postback",
-            "title": "Adams House!",
-            "payload": "adams",
-          },
-          {
-            "type": "postback",
-            "title": "Kirkland House!",
-            "payload": "kirkland",
-          },
-          {
-            "type": "postback",
-            "title": "Mather House!",
-            "payload": "mather",
           }],
 		    }]
 			}
@@ -190,35 +170,13 @@ function handlePostback(sender_psid, received_postback) {
   // Get the payload for the postback
   let payload = received_postback.payload;
 
-  if (payload === 'qh') {
-    response = { 'text': "Hello!" };
-  }
-
   // Set the response based on the postback payload
-  // else if (payload === 'qh') {
-  //     let json_qh = require('./queenshead.json');
-  //     response = { "text": json_qh.data[0].name + ' | ' + json_qh.data[0].start_time + ' to ' + json_qh.data[0].end_time };
-  //     }
+  if (payload === 'qh') {
+    response = { "text": "Please work!" };
+  }
 
-  // else if (payload === 'cabcaf') {
-  //     let json_cc = require('./cabcaf.jsaon');
-  //     response = { "text": json_cc.data[0].name + ' | ' + json_cc.data[0].start_time + ' to ' + json_cc.data[0].end_time };
-  // }
-
-  else if (payload === 'pfoho') {
+  else if (payload === 'cabcaf') {
     response = {"text": "Pfoho response!"};
-  }
-
-  else if (payload === 'adams') {
-    response = {"text": "Adams response!"};
-  }
-
-  else if (payload === 'kirkland') {
-    response = {"text": "Kirkland response!"};
-  }
-
-  else if (payload === 'mather') {
-    response = {"text": "Mather response!"};
   }
 
   // Send the message to acknowledge the postback
