@@ -181,8 +181,8 @@ function handlePostback(sender_psid, received_postback) {
       			"payload": {
       				"template_type": "generic",
       				"elements": [{
-      					"title": "November 11th, 8pm",
-      					"subtitle": "Join Cabot Café in a tea tasting with local provider Mem Tea! We'll learn about growth, production, and taste profiles of White, Green, Oolong, Black, and Herbal teas. Brewing, serving, and **tasting** will also be covered!",
+      					"title": "November 16th, 8pm",
+      					"subtitle": "Harvard College Latin Band is a brand new ensemble aimed at performing Latin music and promoting Latinx culture throughout campus, Boston, and beyond! We perform a range of styles from salsa to boleros and want to get everyone dancing!",
       						"image_url": "http://www.universityevents.harvard.edu/sites/universityevents.harvard.edu/files/venue_gallderies/queenspub_gallery_2_0.jpg",
 					}]
         }
@@ -199,7 +199,7 @@ function handlePostback(sender_psid, received_postback) {
       				"elements": [{
       					"title": "November 1st, 10pm",
       					"subtitle": "Join Cabot Café in a tea tasting with local provider Mem Tea! We'll learn about growth, production, and taste profiles of White, Green, Oolong, Black, and Herbal teas. Brewing, serving, and **tasting** will also be covered!",
-      					"image_url": "https://www.facebook.com/cabotcafe/photos/a.748314161861762.1073741825.278980268795156/1996188620407637",
+      					"image_url": "https://s3.amazonaws.com/thumbnails.thecrimson.com/photos/2017/01/29/220535_1320011.JPG.1500x1000_q95_crop-smart_upscale.jpg",
       		  }]
         }
       }
