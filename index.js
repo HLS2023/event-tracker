@@ -176,23 +176,17 @@ function handlePostback(sender_psid, received_postback) {
   // Set the response based on the postback payload
   if (payload === 'qh') {
     response = {
-		"attachment": {
-			"type": "template",
-				"template_type": "generic",
-				"elements": [{
-					"title": "Which date are you looking for?",
-					"subtitle": "Cambridge Queen's Head Pub?",
-					"image_url": "http://www.universityevents.harvard.edu/sites/universityevents.harvard.edu/files/venue_gallderies/queenspub_gallery_2_0.jpg",
-					"buttons": [{
-              "type": "postback",
-              "title": "November 11th—10pm: Claire Dickson is a Boston-based jazz, pop, and R&B vocalist-composer. Supported by Gabe Fox-Peck(keyboard), Sam Firebush (keyboard), Avery Logan (drums) 9pm: fine&YIKES is a minimalist rock cover band that doesn’t pull any punches feat. Eddy Walda Milo Davidson Jess Erion. HUID +1",
-           },
-           {
-             "type": "postback",
-             "title": "November 16th—Harvard College Latin Band is a brand new ensemble aimed at performing Latin music and promoting Latinx culture throughout campus, Boston, and beyond! We perform a range of styles from salsa to boleros and want to get everyone dancing!",
-          }],
-		    }]
-	    }
+       "attachment": {
+      			"type": "template",
+      			"payload": {
+      				"template_type": "generic",
+      				"elements": [{
+      					"title": "November 11th, 8pm",
+      					"subtitle": "Join Cabot Café in a tea tasting with local provider Mem Tea! We'll learn about growth, production, and taste profiles of White, Green, Oolong, Black, and Herbal teas. Brewing, serving, and **tasting** will also be covered!",
+      						"image_url": "http://www.universityevents.harvard.edu/sites/universityevents.harvard.edu/files/venue_gallderies/queenspub_gallery_2_0.jpg",
+					}]
+        }
+      }
     };
   }
 
@@ -205,7 +199,7 @@ function handlePostback(sender_psid, received_postback) {
       				"elements": [{
       					"title": "November 1st, 10pm",
       					"subtitle": "Join Cabot Café in a tea tasting with local provider Mem Tea! We'll learn about growth, production, and taste profiles of White, Green, Oolong, Black, and Herbal teas. Brewing, serving, and **tasting** will also be covered!",
-      					"image_url": "https://www.facebook.com/cabotcafe/photos/a.748314161861762.1073741825.278980268795156/1996188620407637/?type=3&theater",
+      					"image_url": "https://www.facebook.com/cabotcafe/photos/a.748314161861762.1073741825.278980268795156/1996188620407637",
       		  }]
         }
       }
