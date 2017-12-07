@@ -218,6 +218,7 @@ function handlePostback(sender_psid, received_postback) {
     response = {
       "attachment": {
         "type": "template",
+        "payload": {
           "template_type": "generic",
           "elements": [{
             "title": "This is what's going on in Pfoho!",
@@ -225,8 +226,9 @@ function handlePostback(sender_psid, received_postback) {
             "image_url": "https://c1.staticflickr.com/9/8350/8195210264_4b6b10e6bc_b.jpg"
             }]
           }
-      };
-    }
+      }
+    };
+  }
 
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
