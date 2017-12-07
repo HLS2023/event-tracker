@@ -6,7 +6,7 @@
  *
  * https://developers.facebook.com/docs/messenger-platform/getting-started/quick-start/
  *
- */
+**/
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
@@ -112,8 +112,8 @@ function handleMessage(sender_psid, received_message) {
 			"payload": {
 				"template_type": "generic",
 				"elements": [{
-					"title": "Are you looking for information about Cabot Cafe or Queen's Head?",
-					"subtitle": "Which venue?",
+					"title": "What are you looking for?",
+					"subtitle": "Choose the venue to see what events are going on?",
 					"image_url": "http://www.universityevents.harvard.edu/sites/universityevents.harvard.edu/files/venue_gallderies/queenspub_gallery_2_0.jpg",
 					"buttons":
 					[{
@@ -192,36 +192,36 @@ function handlePostback(sender_psid, received_postback) {
   let payload = received_postback.payload;
 
   // Set the response based on the postback payload
-  if (payload == 'qh') {
+  if (payload === 'qh') {
       let json_qh = require('./queenshead.json');
       for (let index_qh = 0; index_qh < 4; index_qh++)
       {
-          response = 'json_qh.data[index_qh].name' + ' | ' + 'json_qh.data[index_qh].start_time' + ' to ' + 'json_qh.data[index_qh].end_time';
+          response = {"text": json_qh.data[index_qh].name + ' | ' + json_qh.data[index_qh].start_time + ' to ' + json_qh.data[index_qh].end_time};
       }
   }
 
-  else if (payload == 'cabcaf') {
+  else if (payload === 'cabcaf') {
       let json_cc = require('./cabcaf.jsaon');
       for (let index_cc = 0; index_cc < 4; index_cc++)
       {
-          response = 'json_cc.data[index_cc].name' + ' | ' + 'json_cc.data[index_cc].start_time' + ' to ' + 'json_cc.data[index_cc].end_time';
+          response = {"text": json_cc.data[index_cc].name + ' | ' + json_cc.data[index_cc].start_time + ' to ' + json_cc.data[index_cc].end_time};
       }
   }
 
-  else if (payload == 'pfoho') {
-    response = 'Pfoho response!';
+  else if (payload === 'pfoho') {
+    response = {"text": "Pfoho response!"};
   }
 
-  else if (payload == 'adams') {
-    response = 'Adams response!';
+  else if (payload === 'adams') {
+    response = {"text": "Adams response!"};
   }
 
-  else if (payload == 'kirkland') {
-    response = 'Kirkland response!';
+  else if (payload === 'kirkland') {
+    response = {"text": "Kirkland response!"};
   }
 
   else if (payload == 'mather') {
-    response = 'Mather response!';
+    response = {"text": "Mather response!"};
   }
 
   // Send the message to acknowledge the postback
