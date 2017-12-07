@@ -186,7 +186,6 @@ function handleMessage(sender_psid, received_message) {
   callSendAPI(sender_psid, response);
 }
 
-
 function handlePostback(sender_psid, received_postback) {
   let response;
   // Get the payload for the postback
@@ -197,15 +196,15 @@ function handlePostback(sender_psid, received_postback) {
       let json_qh = require('./queenshead.json');
       for (let index_qh = 0; index_qh < 4; index_qh++)
       {
-          response = json_qh.data[index_qh].name + ' | ' + json_qh.data[index_qh].start_time + ' to ' + json_qh.data[index_qh].end_time;
+          response = 'json_qh.data[index_qh].name' + ' | ' + 'json_qh.data[index_qh].start_time' + ' to ' + 'json_qh.data[index_qh].end_time';
       }
   }
 
   else if (payload == 'cabcaf') {
-      let json_cc = require('./cabcaf.json');
+      let json_cc = require('./cabcaf.jsaon');
       for (let index_cc = 0; index_cc < 4; index_cc++)
       {
-          response = json_cc.data[index_cc].name + ' | ' + json_cc.data[index_cc].start_time + ' to ' + json_cc.data[index_cc].end_time;
+          response = 'json_cc.data[index_cc].name' + ' | ' + 'json_cc.data[index_cc].start_time' + ' to ' + 'json_cc.data[index_cc].end_time';
       }
   }
 
@@ -254,4 +253,3 @@ function callSendAPI(sender_psid, response) {
     }
   });
 }
-
