@@ -115,7 +115,8 @@ function handleMessage(sender_psid, received_message) {
 					"title": "Are you looking for information about Cabot Cafe or Queen's Head?",
 					"subtitle": "Which venue?",
 					"image_url": "http://www.universityevents.harvard.edu/sites/universityevents.harvard.edu/files/venue_gallderies/queenspub_gallery_2_0.jpg",
-					"buttons": [{
+					"buttons":
+					[{
             "type": "postback",
             "title": "Cabot Cafe!",
             "payload": "cabcaf",
@@ -124,6 +125,26 @@ function handleMessage(sender_psid, received_message) {
             "type": "postback",
             "title": "Queen's Head!",
             "payload": "qh",
+          },
+          {
+            "type": "postback",
+            "title": "Pforzheimer House (Igloo)!",
+            "payload": "pfoho",
+          },
+          {
+            "type": "postback",
+            "title": "Adams House!",
+            "payload": "adams",
+          },
+          {
+            "type": "postback",
+            "title": "Kirkland House!",
+            "payload": "kirkland",
+          },
+          {
+            "type": "postback",
+            "title": "Mather House!",
+            "payload": "mather",
           }],
 		    }]
 			}
