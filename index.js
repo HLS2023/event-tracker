@@ -193,6 +193,9 @@ function handlePostback(sender_psid, received_postback) {
              "title": "November 16th—Harvard College Latin Band is a brand new ensemble aimed at performing Latin music and promoting Latinx culture throughout campus, Boston, and beyond! We perform a range of styles from salsa to boleros and want to get everyone dancing!",
           }],
 		    }]
+      }
+	  }
+    };
   }
 
   else if (payload === 'cabcaf') {
@@ -210,6 +213,9 @@ function handlePostback(sender_psid, received_postback) {
                     "title": "November 1st—10pm: Join Cabot Café in a tea tasting with local provider Mem Tea! We'll learn about growth, production, and taste profiles of White, Green, Oolong, Black, and Herbal teas. Brewing, serving, and **tasting** will also be covered!",
                  }],
       		    }]
+            }
+      }
+    };
   }
 
   else if (payload === 'pfoho') {
